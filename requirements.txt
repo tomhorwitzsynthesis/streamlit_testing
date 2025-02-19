@@ -2,7 +2,7 @@ streamlit
 pandas
 openpyxl
 plotly
-PIL
+pillow
 os
 plotly.express
 time
