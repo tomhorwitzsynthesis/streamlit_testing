@@ -2,3 +2,7 @@ streamlit
 pandas
 openpyxl
 plotly
+PIL
+os
+plotly.express
+time
