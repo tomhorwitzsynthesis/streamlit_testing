@@ -3,6 +3,5 @@ pandas
 openpyxl
 plotly
 pillow
-os
-plotly.express
+plotly
 time
