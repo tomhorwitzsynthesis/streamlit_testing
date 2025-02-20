@@ -7,7 +7,7 @@ import numpy as np
 from company_dashboard import generate_company_dashboard  # Import company-specific function
 
 # Folder containing data files
-DATA_FOLDER = "data"
+DATA_FOLDER = "CompOS_testing/data"
 
 # Load company-file mappings from JSON
 keys_file = os.path.join(DATA_FOLDER, "keys.txt")
