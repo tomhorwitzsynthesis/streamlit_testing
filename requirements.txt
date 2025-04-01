@@ -4,3 +4,6 @@ openpyxl
 plotly
 pillow
 xlsxwriter
+geopandas
+matplotlib
+shapely
