@@ -1,0 +1,9 @@
+streamlit
+pandas
+openpyxl
+plotly
+pillow
+xlsxwriter
+geopandas
+matplotlib
+shapely
