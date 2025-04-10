@@ -1,0 +1,8 @@
+{
+    "Darnu": "darnu_data.xlsx",
+    "Eika": "eika_data.xlsx",
+    "Kapitel": "kapitel_data.xlsx",
+    "Piche": "piche_data.xlsx",
+    "Restate": "restate_data.xlsx",
+    "SIRIN": "sirin_data.xlsx"
+}
