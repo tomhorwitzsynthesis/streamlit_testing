@@ -46,8 +46,10 @@ elif section == "Social Media":
 
 elif section == "Content Pillars":
     st.title("🧱 Content Pillar Dashboard")
-    render_content_pillars()
+    #render_content_pillars()
+    st.info("This section is under construction")
 
 elif section == "Audience Affinity":
     st.title("🎯 Audience Affinity Dashboard")
-    render_audience_affinity()
+    #render_audience_affinity()
+    st.info("This section is under construction")
