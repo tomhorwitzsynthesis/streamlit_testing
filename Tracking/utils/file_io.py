@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import streamlit as st
 
-DATA_ROOT = "data"
+DATA_ROOT = "Tracking/data"
 
 # ------------------------
 # 📄 Load Agility (News)
