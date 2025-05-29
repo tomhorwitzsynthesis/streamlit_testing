@@ -8,7 +8,7 @@ from utils.config import BRAND_NAME_MAPPING
 def render():
 
     try:
-        with open('data/audience_affinity/audience_affinity_outputs.pkl', 'rb') as f:
+        with open('Tracking/data/audience_affinity/audience_affinity_outputs.pkl', 'rb') as f:
             affinity_data = pickle.load(f)
 
         summary_df = affinity_data.get("summary_df")

@@ -6,7 +6,7 @@ from utils.config import BRAND_NAME_MAPPING
 
 def render():
     try:
-        with open('data/content_pillars/content_pillar_outputs.pkl', 'rb') as f:
+        with open('Tracking/data/content_pillars/content_pillar_outputs.pkl', 'rb') as f:
             content_pillar_outputs = pickle.load(f)
 
         st.subheader("🏛️ Content Pillar Analysis")
