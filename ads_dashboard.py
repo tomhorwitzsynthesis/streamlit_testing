@@ -141,11 +141,11 @@ col1, col2 = st.columns(2)
 with col1:
     if akropolis in reach_stats.index:
         r = reach_stats.loc[akropolis]
-        format_metric_card("Reach", f"{int(r['current']):,}", r['change_pct'], r['rank_now'], r['rank_change'], debug=True)
+        format_metric_card("Reach", f"{int(r['current']):,}", r['change_pct'], r['rank_now'], r['rank_change'], debug=False)
 with col2:
     if akropolis in ads_stats.index:
         a = ads_stats.loc[akropolis]
-        format_metric_card("New Ads", int(a['current']), a['change_pct'], a['rank_now'], a['rank_change'], debug=True)
+        format_metric_card("New Ads", int(a['current']), a['change_pct'], a['rank_now'], a['rank_change'], debug=False)
 
 col3, col4 = st.columns(2)
 with col3:
@@ -153,7 +153,7 @@ with col3:
         d = duration_stats.loc[akropolis]
         a = ads_stats.loc[akropolis]['current']
         avg_dur = d['current'] / a if a else 0
-        format_metric_card("Avg Duration", f"{avg_dur:.1f} days", d['change_pct'], d['rank_now'], d['rank_change'], debug=True)
+        format_metric_card("Avg Duration", f"{avg_dur:.1f} days", d['change_pct'], d['rank_now'], d['rank_change'], debug=False)
 with col4:
     if akropolis in active_stats.index:
         act = active_stats.loc[akropolis]
@@ -163,7 +163,7 @@ with col4:
             act['change_pct'],
             act['rank_now'],
             act['rank_change'],
-            debug=True
+            debug=False
         )
 
 # --- IN DEPTH SECTION ---
@@ -332,6 +332,47 @@ else:
     st.markdown(f"""
     <div style="border:1px solid #ccc; border-radius:10px; padding:20px; background-color:#fafafa;">
     <pre style="white-space: pre-wrap; font-size: 0.95em;">{text_data[brand_selection]}</pre>
+    </div>
+    """, unsafe_allow_html=True)
+
+# --- NEW CAMPAIGNS SECTION ---
+st.header("New Campaigns – July 2025")
+
+st.markdown("""
+You can either view the top-performing ads this month, or read a summary of campaigns that are considered new compared to previous months.
+""")
+
+option = st.radio("Choose campaign view:", ["Top 5 Ads by Reach", "LLM-Based Campaign Summary"])
+
+# Simple top 5
+if option == "Top 5 Ads by Reach":
+    july_ads = df_filtered[df_filtered['startDateFormatted'].dt.month == 7].copy()
+    top_5 = july_ads[['pageName', 'reach', 'snapshot/body/text']].dropna(subset=['snapshot/body/text'])
+    top_5 = top_5.sort_values(by='reach', ascending=False).head(5)
+
+    for idx, row in top_5.iterrows():
+        st.markdown(f"""
+        <div style="border:1px solid #ddd; border-radius:10px; padding:15px; margin-bottom:15px;">
+            <strong>{row['pageName']}</strong><br>
+            <em>Reach:</em> {int(row['reach']):,}<br>
+            <p style="margin-top:10px;">{row['snapshot/body/text']}</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+# LLM-based textual summary
+# LLM-based textual summary
+else:
+    st.markdown("""
+    <div style="border:1px solid #ccc; border-radius:10px; padding:20px; background-color:#f9f9f9;">
+    <h4>July Campaign Highlights – LLM Summary</h4>
+
+    <p><strong>AKROPOLIS | Vilnius:</strong> July saw a renewed push around the <em>DYLAS</em> sale campaign, highlighting aggressive discount tiers (20–50%) with fresh creative. Although DYLAS existed before, the language and positioning differ from June, signaling a new phase. No continuation of the spring-style guides was observed.</p>
+
+    <p><strong>OZAS:</strong> Launched a new campaign titled <em>"TALUTTI UŽSPOTINAM"</em>, promoting their dining partner via SPOT discounts. This food-centric initiative is new and did not appear in prior months. It reflects an experiential shift aimed at driving food court traffic.</p>
+
+    <p><strong>PANORAMA:</strong> Introduced a brand-new store campaign for <em>HUPPA</em>—its first presence in Lithuania. The store opening was given high visibility through dedicated creative. Additionally, beauty and cosmetics promotions featured more prominently, suggesting a coordinated seasonal retail push not present in June.</p>
+
+    <p><strong>Conclusion:</strong> Each brand introduced distinctive new campaigns in July: AKROPOLIS built urgency around discounts, OZAS emphasized food and app-based offers, and PANORAMA spotlighted retail expansion and beauty-focused sales.</p>
     </div>
     """, unsafe_allow_html=True)
 
