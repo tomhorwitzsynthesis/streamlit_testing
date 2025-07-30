@@ -53,18 +53,27 @@ st.caption("Monitoring ad activity and reach over the past 6 months (Feb–Jul 2
 # --- OVERVIEW SECTION ---
 st.header("Overview")
 
-# 1. Ad Volume Share by Month
+# 1. Ad Volume Share by Month (with Reach and Count tabs)
 st.subheader("Ad Volume Share by Month")
-share_tabs = st.tabs(["Feb", "Mar", "Apr", "May", "Jun", "Jul"])
+month_tabs = st.tabs(["Feb", "Mar", "Apr", "May", "Jun", "Jul"])
 months = [2, 3, 4, 5, 6, 7]
 
 for i, month in enumerate(months):
-    with share_tabs[i]:
+    with month_tabs[i]:
+        sub_tabs = st.tabs(["Number of Ads", "Reach"])
+
         month_data = df_filtered[df_filtered['startDateFormatted'].dt.month == month]
-        month_share = month_data['brand'].value_counts().reset_index()
-        month_share.columns = ['brand', 'count']
-        fig = px.pie(month_share, values='count', names='brand', title=f'Share of Ad Volume – {month:02d}/2025')
-        st.plotly_chart(fig, use_container_width=True, key=f"volume_share_{month}")
+
+        with sub_tabs[0]:  # Number of Ads
+            ad_counts = month_data['brand'].value_counts().reset_index()
+            ad_counts.columns = ['brand', 'count']
+            fig = px.pie(ad_counts, values='count', names='brand', title=f'Ad Count Share – {month:02d}/2025')
+            st.plotly_chart(fig, use_container_width=True, key=f"pie_ads_{month}")
+
+        with sub_tabs[1]:  # Reach
+            reach_totals = month_data.groupby('brand')['reach'].sum().reset_index()
+            fig = px.pie(reach_totals, values='reach', names='brand', title=f'Reach Share – {month:02d}/2025')
+            st.plotly_chart(fig, use_container_width=True, key=f"pie_reach_{month}")
 
 # 2. Summary Cards
 reach_stats = summary(df_filtered, 'reach')
