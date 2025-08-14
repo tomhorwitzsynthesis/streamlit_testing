@@ -111,7 +111,14 @@ merged["Received_Other_Prize"] = merged[gift_col].str.contains("KITI", na=False)
 
 # Base + segments
 base = merged[merged["Revenue_24_25"] > 0].copy()
-segments = list(pd.Series(merged["Size_Segment"].dropna().unique()).sort_values())
+all_possible_segments = [
+    "Large",
+    "Medium",
+    "Small Sizeable",
+    "Small Medium",
+    "Small Tiny"
+]
+segments = [seg for seg in all_possible_segments if seg in merged["Size_Segment"].unique()]
 if not segments:
     st.error("No non-null values found in 'Size_Segment'.")
     st.stop()
@@ -131,6 +138,9 @@ show_tbl = avg_tbl.copy()
 for col in ["All Farms","Trip Receivers","Small Trip Receivers","Big Trip Receivers","Other Prizes"]:
     if col in show_tbl.columns:
         show_tbl[col] = show_tbl[col].apply(fmt_currency)
+
+# Sort the table by your desired segment order
+show_tbl = show_tbl.set_index("Segment").reindex(segments).reset_index()
 
 st.subheader("Average Revenue by Segment and Gift Category (24/25)")
 st.dataframe(show_tbl, use_container_width=True)
