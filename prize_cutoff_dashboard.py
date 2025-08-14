@@ -31,7 +31,7 @@ def load_or_build_averages(df: pd.DataFrame):
         try:
             avg_df = pd.read_csv(AVG_CSV_PATH)
             # Basic sanity
-            required_cols = {"Segment","All Farms","Target Trip Receivers",
+            required_cols = {"Segment","All Farms","Trip Receivers",
                              "Small Trip Receivers","Big Trip Receivers","Other Prizes"}
             if required_cols.issubset(set(avg_df.columns)):
                 return avg_df
@@ -51,7 +51,7 @@ def load_or_build_averages(df: pd.DataFrame):
         rows.append({
             "Segment": seg,
             "All Farms": seg_avg(seg_df, seg_df["Revenue_24_25"] > 0),
-            "Target Trip Receivers": seg_avg(seg_df, seg_df.get("Received_Target_Trip", pd.Series(False, index=seg_df.index))),
+            "Trip Receivers": seg_avg(seg_df, seg_df.get("Received_Target_Trip", pd.Series(False, index=seg_df.index))),
             "Small Trip Receivers":  seg_avg(seg_df, seg_df.get("Received_Small_Trip",  pd.Series(False, index=seg_df.index))),
             "Big Trip Receivers":    seg_avg(seg_df, seg_df.get("Received_Big_Trip",    pd.Series(False, index=seg_df.index))),
             "Other Prizes":          seg_avg(seg_df, seg_df.get("Received_Other_Prize", pd.Series(False, index=seg_df.index))),
@@ -128,7 +128,7 @@ avg_tbl = load_or_build_averages(merged)
 # Show top averages table
 fmt_currency = lambda x: "€ {:,.0f}".format(x) if pd.notnull(x) else "—"
 show_tbl = avg_tbl.copy()
-for col in ["All Farms","Target Trip Receivers","Small Trip Receivers","Big Trip Receivers","Other Prizes"]:
+for col in ["All Farms","Trip Receivers","Small Trip Receivers","Big Trip Receivers","Other Prizes"]:
     if col in show_tbl.columns:
         show_tbl[col] = show_tbl[col].apply(fmt_currency)
 
@@ -136,8 +136,34 @@ st.subheader("Average Revenue by Segment and Gift Category (24/25)")
 st.dataframe(show_tbl, use_container_width=True)
 
 # Defaults for sliders (NaN -> 0)
-defaults_small = dict(zip(avg_tbl["Segment"], avg_tbl["Small Trip Receivers"].fillna(0.0))) if "Small Trip Receivers" in avg_tbl else {}
-defaults_big   = dict(zip(avg_tbl["Segment"], avg_tbl["Big Trip Receivers"].fillna(0.0)))   if "Big Trip Receivers"   in avg_tbl else {}
+defaults_small = {}
+defaults_big = {}
+
+if "Small Trip Receivers" in avg_tbl and "Big Trip Receivers" in avg_tbl:
+    for seg in avg_tbl["Segment"]:
+        small_val = avg_tbl.loc[avg_tbl["Segment"] == seg, "Small Trip Receivers"].values[0]
+        big_val = avg_tbl.loc[avg_tbl["Segment"] == seg, "Big Trip Receivers"].values[0]
+        # If no receivers (NaN or 0), set to 100000/200000
+        defaults_small[seg] = 300000 if pd.isna(small_val) or small_val == 0 else small_val
+        defaults_big[seg]   = 400000 if pd.isna(big_val)   or big_val == 0 else big_val
+
+# =========================
+# Sidebar: Global sliders
+# =========================
+st.sidebar.header("Global Cutoffs (override all segments)")
+
+global_small = st.sidebar.slider(
+    "Global Small Trip cutoff (€)",
+    min_value=0, max_value=2_000_000, value=400_000, step=1000,
+    help="Overrides all segment Small Trip cutoffs"
+)
+global_big = st.sidebar.slider(
+    "Global Big Trip cutoff (€)",
+    min_value=0, max_value=2_000_000, value=500_000, step=1000,
+    help="Overrides all segment Big Trip cutoffs"
+)
+
+use_global = st.sidebar.checkbox("Use global cutoffs for all segments", value=False)
 
 # =========================
 # Sidebar sliders (two per segment)
@@ -148,16 +174,7 @@ small_cutoffs = {}
 big_cutoffs = {}
 
 def suggested_max_for_segment(seg_df: pd.DataFrame, defaults: list[float]) -> int:
-    if seg_df.empty:
-        return int(max([0] + defaults))
-    vals = seg_df["Revenue_24_25"].dropna()
-    if vals.empty:
-        return int(max([0] + defaults))
-    if len(vals) >= 5:
-        p95 = float(np.percentile(vals, 95))
-        m = max(p95 * 1.2, max(defaults))
-    else:
-        m = max(float(vals.max()), max(defaults))
+    m = 1000000
     return int(max(m, 0))
 
 for seg in segments:
@@ -182,7 +199,8 @@ for seg in segments:
                 min_value=0, max_value=int(seg_max), value=small_val, step=1000,
                 label_visibility="collapsed"
             )
-        small_cutoffs[seg] = small_slider if small_slider != small_val else small_val
+        # Use global if checked
+        small_cutoffs[seg] = global_small if use_global else (small_slider if small_slider != small_val else small_val)
 
         col_small2, col_big2 = st.columns(2)
 
@@ -199,7 +217,8 @@ for seg in segments:
                 min_value=0, max_value=int(seg_max), value=big_val, step=1000,
                 label_visibility="collapsed"
             )
-        big_cutoffs[seg] = big_slider if big_slider != big_val else big_val
+        # Use global if checked
+        big_cutoffs[seg] = global_big if use_global else (big_slider if big_slider != big_val else big_val)
 
         if small_cutoffs[seg] >= big_cutoffs[seg]:
             st.info("Small cutoff is ≥ Big cutoff. Small eligibility will be empty until you lower it.")
@@ -308,7 +327,7 @@ def actual_receivers(df):
             "Segment": seg,
             "Actual Small Trip Receivers": int(seg_df["Received_Small_Trip"].sum()),
             "Actual Big Trip Receivers": int(seg_df["Received_Big_Trip"].sum()),
-            "Actual Target Trip Receivers": int(seg_df["Received_Target_Trip"].sum()),
+            "Actual Trip Receivers": int(seg_df["Received_Target_Trip"].sum()),
             "Actual Other Prize Receivers": int(seg_df["Received_Other_Prize"].sum()),
         })
     return pd.DataFrame(rows)
