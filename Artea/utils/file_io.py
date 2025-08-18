@@ -146,8 +146,8 @@ def load_ads_data():
     """
     # Try common roots
     candidate_paths = [
-        os.path.join("data", "ads", "ads.xlsx"),
-        os.path.join("data", "ads", "ads_scraping.xlsx"),
+        os.path.join(DATA_ROOT, "ads", "ads.xlsx"),
+        os.path.join(DATA_ROOT, "ads", "ads_scraping.xlsx"),
         os.path.join(DATA_ROOT, "ads", "ads_scraping (2).xlsx"),
         os.path.join(DATA_ROOT, "ads", "ads_scraping.xlsx"),
     ]
@@ -222,3 +222,4 @@ def load_content_pillar_outputs():
     except Exception as e:
         st.error(f"[Content Pillars] Error loading outputs: {e}")
         return None
+
