@@ -117,6 +117,24 @@ df['platforms'] = df.get('publisherPlatform')
 df['brand'] = df.get('pageName')
 df['isActive'] = df.get('isActive', False).astype(bool) if 'isActive' in df.columns else False
 
+# Canonicalize brand names for consistency across charts
+
+def canonicalize_brand(name: str) -> str:
+    n = normalize_brand(name)
+    mapping = {
+        'dpd lietuva': 'DPD Lietuva',
+        'lp express': 'LP EXPRESS',
+        'omniva lietuva': 'Omniva Lietuva',
+        'smartpost lietuva': 'SmartPosti Lietuva',
+        'smartposti lietuva': 'SmartPosti Lietuva',
+        'venipak lietuva': 'Venipak Lietuva',
+    }
+    return mapping.get(n, name if isinstance(name, str) else "")
+
+# Apply canonicalization
+if 'brand' in df.columns:
+    df['brand'] = df['brand'].apply(canonicalize_brand)
+
 # Filter for last 6 months (Feb–Jul 2025)
 end_date = pd.Timestamp("2025-07-31", tz="UTC")
 start_date = end_date - relativedelta(months=6)
@@ -155,10 +173,17 @@ st.header("Overview")
 # 1. Ad Volume Share by Month (with Reach and Count tabs)
 st.subheader("Ad Volume Share by Month")
 
-# Create consistent color mapping for all brands using a fixed color sequence
+# Hardcoded color mapping for consistent colors across all charts
+color_map = {
+    "DPD Lietuva": "#1f77b4",      # Blue
+    "LP EXPRESS": "#ff7f0e",       # Orange
+    "Omniva Lietuva": "#2ca02c",   # Green
+    "SmartPosti Lietuva": "#d62728", # Red
+    "Venipak Lietuva": "#9467bd"   # Purple
+}
+
+# Get all brands from data, but use hardcoded colors when available
 all_brands = sorted(df_filtered['brand'].unique())
-colors = px.colors.qualitative.Set3 + px.colors.qualitative.Pastel1 + px.colors.qualitative.Dark2
-color_map = {brand: colors[i % len(colors)] for i, brand in enumerate(all_brands)}
 
 month_labels = ["6 months", "Feb", "Mar", "Apr", "May", "Jun", "Jul"]
 months = ["all", 2, 3, 4, 5, 6, 7]
@@ -176,16 +201,18 @@ for i, month in enumerate(months):
         with sub_tabs[0]:  # Number of Ads
             ad_counts = month_data['brand'].value_counts().reset_index()
             ad_counts.columns = ['brand', 'count']
-            # Ensure consistent brand order
             ad_counts = ad_counts.sort_values('brand')
-            fig = px.pie(ad_counts, values='count', names='brand', title=f'Ad Count Share – {"All 6 months" if month == "all" else f"{month:02d}/2025"}', color_discrete_map=color_map)
+            # Create a color column based on brand
+            ad_counts['color'] = ad_counts['brand'].map(color_map)
+            fig = px.pie(ad_counts, values='count', names='brand', color='color', title=f'Ad Count Share – {"All 6 months" if month == "all" else f"{month:02d}/2025"}')
             st.plotly_chart(fig, use_container_width=True, key=f"pie_ads_{month}")
 
         with sub_tabs[1]:  # Reach
             reach_totals = month_data.groupby('brand')['reach'].sum().reset_index()
-            # Ensure consistent brand order
             reach_totals = reach_totals.sort_values('brand')
-            fig = px.pie(reach_totals, values='reach', names='brand', title=f'Reach Share – {"All 6 months" if month == "all" else f"{month:02d}/2025"}', color_discrete_map=color_map)
+            # Create a color column based on brand
+            reach_totals['color'] = reach_totals['brand'].map(color_map)
+            fig = px.pie(reach_totals, values='reach', names='brand', color='color', title=f'Reach Share – {"All 6 months" if month == "all" else f"{month:02d}/2025"}')
             st.plotly_chart(fig, use_container_width=True, key=f"pie_reach_{month}")
 
 # 2. Summary Cards (Reach, Brand Strength, Creativity)
@@ -438,6 +465,83 @@ else:
                         </div>
                         """, unsafe_allow_html=True)
 
+
+
+
+
+
+# --- TOP ARCHETYPES SECTION ---
+
+st.header("Top Archetypes by Company")
+
+def load_top_archetypes():
+    """Load top 3 archetypes for each company from compos analysis files"""
+    archetypes_data = {}
+    if not os.path.isdir(COMPOS_DIR):
+        return archetypes_data
+    
+    for path in glob.glob(os.path.join(COMPOS_DIR, "*_compos_analysis.xlsx")):
+        fname = os.path.basename(path)
+        if fname.startswith("~$"):
+            continue  # skip temp/lock files
+        brand_display = fname.replace("_compos_analysis.xlsx", "").strip()
+        try:
+            df_comp = pd.read_excel(path, sheet_name="Raw Data")
+            if 'Top Archetype' in df_comp.columns and len(df_comp) > 0:
+                # Get value counts of archetypes
+                vc = df_comp['Top Archetype'].dropna().value_counts()
+                total_ads = len(df_comp['Top Archetype'].dropna())
+                
+                # Get top 3 archetypes with their counts and percentages
+                top_3 = vc.head(3)
+                archetypes_list = []
+                for archetype, count in top_3.items():
+                    percentage = (count / total_ads) * 100 if total_ads > 0 else 0
+                    archetypes_list.append({
+                        'archetype': archetype,
+                        'percentage': percentage,
+                        'count': count
+                    })
+                
+                archetypes_data[brand_display] = archetypes_list
+        except Exception as e:
+            # ignore bad files
+            pass
+    return archetypes_data
+
+archetypes_data = load_top_archetypes()
+
+if archetypes_data:
+    # Create tabs for each company
+    company_tabs = st.tabs(list(archetypes_data.keys()))
+    
+    for i, (company, archetypes) in enumerate(archetypes_data.items()):
+        with company_tabs[i]:
+            st.subheader(f"{company} - Top 3 Archetypes")
+            
+            # Create 3 columns for the 3 archetype cards
+            col1, col2, col3 = st.columns(3)
+            
+            for j, archetype_info in enumerate(archetypes):
+                # Determine which column to use
+                if j == 0:
+                    col = col1
+                elif j == 1:
+                    col = col2
+                else:
+                    col = col3
+                
+                with col:
+                    st.markdown(f"""
+                    <div style="border:1px solid #ddd; border-radius:10px; padding:10px; margin-bottom:10px; text-align:center;">
+                        <h4 style="margin:0; color:#333;">{archetype_info['archetype']}</h4>
+                        <h2 style="margin:5px 0; color:#333; font-size:2.5em;">{archetype_info['percentage']:.1f}%</h2>
+                        <p style="margin:0; color:#666; font-size:0.9em;">{archetype_info['count']} ads</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+else:
+    st.info("No archetype data available. Please ensure compos analysis files are in the data/compos directory.")
+
 # --- IN DEPTH SECTION ---
 
 st.header("In-Depth View")
@@ -446,6 +550,10 @@ st.header("In-Depth View")
 st.subheader("Ad Start Date Distribution")
 st.markdown("This chart shows the number of ads launched each day per brand to help identify campaign patterns and bursts.")
 hist = px.histogram(df_filtered, x='startDateFormatted', color='brand', nbins=60, barmode='overlay')
+hist.update_layout(
+    xaxis_title="",
+    yaxis_title="Number of Ads"
+)
 st.plotly_chart(hist, use_container_width=True)
 
 # Volume Trends
