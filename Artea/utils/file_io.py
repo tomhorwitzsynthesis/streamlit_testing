@@ -193,7 +193,7 @@ def load_ads_data():
 
 @st.cache_data
 def load_audience_affinity_outputs():
-    path = os.path.join("data", "audience_affinity", "audience_affinity_outputs.pkl")
+    path = os.path.join(DATA_ROOT, "audience_affinity", "audience_affinity_outputs.pkl")
     if not os.path.exists(path):
         st.warning("Audience affinity outputs not found.")
         return None
@@ -211,7 +211,7 @@ def load_audience_affinity_outputs():
 
 @st.cache_data
 def load_content_pillar_outputs():
-    path = os.path.join("data", "content_pillars", "content_pillar_outputs.pkl")
+    path = os.path.join(DATA_ROOT, "content_pillars", "content_pillar_outputs.pkl")
     if not os.path.exists(path):
         st.warning("Content pillar outputs not found.")
         return None
@@ -222,4 +222,5 @@ def load_content_pillar_outputs():
     except Exception as e:
         st.error(f"[Content Pillars] Error loading outputs: {e}")
         return None
+
 
