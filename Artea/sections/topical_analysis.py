@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 import os
+from utils.config import DATA_ROOT  # <-- import here
 
-TOPIC_INSIGHTS_PATH = os.path.join("data", "agility", "topic_insights.xlsx")
+TOPIC_INSIGHTS_PATH = os.path.join(DATA_ROOT, "agility", "topic_insights.xlsx")
 
 def load_topic_insights():
     if not os.path.exists(TOPIC_INSIGHTS_PATH):

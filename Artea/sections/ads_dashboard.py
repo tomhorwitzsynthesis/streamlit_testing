@@ -12,10 +12,9 @@ import ast
 import os
 import glob
 from utils.file_io import load_agility_data
-from utils.config import BRANDS
+from utils.config import BRANDS, DATA_ROOT
 
-# Added: local path for ads compos files
-ADS_COMPOS_DIR = os.path.join("data", "ads", "compos")
+ADS_COMPOS_DIR = os.path.join(DATA_ROOT, "ads", "compos")
 
 
 def _parse_platforms(val):
@@ -96,7 +95,7 @@ def _format_metric_card(label, val, pct, rank_now, rank_change, debug=False):
 
 @st.cache_data(ttl=0)
 def _load_creativity():
-    path = os.path.join("data", "creativity", "creativity_ranking.xlsx")
+    path = os.path.join(DATA_ROOT, "creativity", "creativity_ranking.xlsx")
     if not os.path.exists(path):
         return pd.DataFrame(columns=['brand', 'rank', 'originality_score', 'justification', 'examples'])
     try:
@@ -207,7 +206,7 @@ def _load_top_archetypes_from_agility():
 
 @st.cache_data(ttl=0)
 def _load_key_advantages():
-    path = os.path.join("data", "key_advantages", "key_advantages.xlsx")
+    path = os.path.join(DATA_ROOT, "key_advantages", "key_advantages.xlsx")
     if not os.path.exists(path):
         return {}
     advantages = {}
@@ -228,7 +227,7 @@ def _load_key_advantages():
 
 
 def _load_key_advantages_summary():
-    path = os.path.join("data", "key_advantages", "key_advantages_summary.xlsx")
+    path = os.path.join(DATA_ROOT, "key_advantages", "key_advantages_summary.xlsx")
     if not os.path.exists(path):
         return ""
     try:
