@@ -588,6 +588,127 @@ def render():
                 fig = px.line(pf_ads, x='startDateFormatted', y='ads', color='brand')
                 st.plotly_chart(fig, use_container_width=True, key=f"ads_{platform}")
 
+    # --- Top 5 Product Types Section ---
+    st.markdown("### Top 5 Product Types")
+
+    prod_path = os.path.join(DATA_ROOT, "ads", "products", "Artea_Product_Invest_COMBINED.xlsx")
+    if not os.path.exists(prod_path):
+        st.info("Product file not found. Place Artea_Product_Invest_COMBINED.xlsx in data/ads/products.")
+    else:
+        df_prod = pd.read_excel(prod_path)
+        df_prod.columns = [str(c).strip() for c in df_prod.columns]
+
+        # Filter out unwanted clusters
+        exclude_clusters = ["Financial Education", "Financial Planning Services"]
+        df_prod = df_prod[~df_prod["Cluster_ProductType"].isin(exclude_clusters)]
+
+        banks = sorted(df_prod["BANK"].dropna().unique())
+        tab_labels = ["Overall"] + banks
+        prod_tabs = st.tabs(tab_labels)
+
+        def top5_overall(df):
+            df = df[df["new_classifcation"].notna() & (df["new_classifcation"].str.upper() != "NONE")]
+            top = df["new_classifcation"].value_counts().head(5)
+            total = df["new_classifcation"].count()
+            return [(cat, cnt / total * 100 if total > 0 else 0) for cat, cnt in top.items()], total
+
+        def top5_investment(df):
+            df = df[
+                (df["ad_label"].astype(str).str.upper() == "INVESTMENT") &
+                (df["new_classifcation"].astype(str).str.lower() == "investment products") &
+                df["Product Type"].notna() &
+                (df["Product Type"].str.upper() != "NONE")
+            ]
+            top = df["Product Type"].value_counts().head(5)
+            total = df["Product Type"].count()
+            return [(cat, cnt / total * 100 if total > 0 else 0) for cat, cnt in top.items()], total
+
+        for i, tab_name in enumerate(tab_labels):
+            with prod_tabs[i]:
+                if tab_name == "Overall":
+                    df_tab = df_prod
+                else:
+                    df_tab = df_prod[df_prod["BANK"] == tab_name]
+
+                col1, col2 = st.columns(2)
+                # Overall Top 5
+                with col1:
+                    top5, total_count = top5_overall(df_tab)
+                    st.markdown(f"""
+                    <div style="border:2px solid #bbb; border-radius:12px; padding:12px; margin-bottom:12px;">
+                        <h5 style="margin:0;">Top 5 Product Types (All) <span style="font-weight:normal; color:#555;">({total_count} Total Products)</span></h5>
+                    """, unsafe_allow_html=True)
+                    for cat, pct in top5:
+                        st.markdown(f"""
+                        <div style="display:flex; align-items:center; margin:10px 0;">
+                            <div style="border:1px solid #ddd; border-radius:8px; padding:10px 16px; font-size:1.1em; font-weight:600; flex:1; background:#fafbfc; text-align:center;">
+                                {cat}
+                            </div>
+                            <div style="border:1px solid #555; border-radius:8px; padding:8px 14px; margin-left:10px; font-size:1em; font-weight:bold; color:#555; background:#f6fafd; min-width:70px; text-align:center;">
+                                {pct:.1f}%
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+
+                # Investment Top 5
+                with col2:
+                    top5_inv, total_count_inv = top5_investment(df_tab)
+                    st.markdown(f"""
+                    <div style="border:2px solid #bbb; border-radius:12px; padding:12px; margin-bottom:12px;">
+                        <h5 style="margin:0;">Top 5 Investment Product Types <span style="font-weight:normal; color:#555;">({total_count_inv} Total Products)</span></h5>
+                    """, unsafe_allow_html=True)
+                    for cat, pct in top5_inv:
+                        st.markdown(f"""
+                        <div style="display:flex; align-items:center; margin:10px 0;">
+                            <div style="border:1px solid #ddd; border-radius:8px; padding:10px 16px; font-size:1.1em; font-weight:600; flex:1; background:#fafbfc; text-align:center;">
+                                {cat}
+                            </div>
+                            <div style="border:1px solid #555; border-radius:8px; padding:8px 14px; margin-left:10px; font-size:1em; font-weight:bold; color:#555; background:#f6fafd; min-width:70px; text-align:center;">
+                                {pct:.1f}%
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+
+                # --- Unique Products, Unique Investment Comms & Unique Education Initiatives (bank tabs only) ---
+                if tab_name != "Overall":
+                    unique_info = {
+                        "Artea": {
+                            "Unique products": "Smart Wallet, Artea Life Insurance for Critical Illnesses, and Summer Savings Deposit.",
+                            "Unique Investment Comms": "Investment Consultation Service, Financial Management Tools, and various Pension Funds.",
+                            "Unique Education Initiatives": "\"Investavimo kelionė\" series focusing on investment strategies."
+                        },
+                        "Luminor Lietuva": {
+                            "Unique products": "Luminor Black Card, Luminor Business Solutions, and Luminor Cashback Offer.",
+                            "Unique Investment Comms": "Luminor Investor platform, One Euro a Day Savings Plan, and various Pension Funds.",
+                            "Unique Education Initiatives": "\"Lietuvos ekonomikos apžvalga\" providing expert analysis on the Lithuanian economy."
+                        },
+                        "SEB Lietuvoje": {
+                            "Unique products": "SEB Bank Card for Children, SEB Client Services, and PRO BRO Monthly Subscription.",
+                            "Unique Investment Comms": "Future Pension Calculator, SEB Ambasadorių Programa, and various Pension Investment Products.",
+                            "Unique Education Initiatives": "\"SEB Ambasadorių Programa\" empowering students to teach financial literacy."
+                        },
+                        "Swedbank Lietuvoje": {
+                            "Unique products": "Solar Power Plant Financing, EIF Guarantee for Business Expansion, and Pegaso Gift Voucher.",
+                            "Unique Investment Comms": "Swedbank Robur Funds, Mini Investicijos, and various educational campaigns.",
+                            "Unique Education Initiatives": "\"Swedbank Finansų laboratorija\" offering free financial literacy education for students."
+                        },
+                        "Citadele bankas": {
+                            "Unique products": "C smart NEON Card, Citadele Piggy Bank, and C prime and payment ring.",
+                            "Unique Investment Comms": "Money Knowledge Test and Investment Account.",
+                            "Unique Education Initiatives": "\"Money Knowledge Test\" engaging users in assessing their financial knowledge."
+                        }
+                    }
+                    info = unique_info.get(tab_name, None)
+                    if info:
+                        st.markdown("#### Unique Products")
+                        st.markdown(f"- {info['Unique products']}")
+                        st.markdown("#### Unique Investment Comms")
+                        st.markdown(f"- {info['Unique Investment Comms']}")
+                        st.markdown("#### Unique Education Initiatives")
+                        st.markdown(f"- {info['Unique Education Initiatives']}")
+
     # Text analysis and new campaigns sections can be added later as optional blocks
 
 
