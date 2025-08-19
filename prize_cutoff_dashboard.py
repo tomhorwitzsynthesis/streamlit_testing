@@ -139,6 +139,14 @@ for col in ["All Farms","Trip Receivers","Small Trip Receivers","Big Trip Receiv
     if col in show_tbl.columns:
         show_tbl[col] = show_tbl[col].apply(fmt_currency)
 
+# Set "-" for trip columns in small segments
+small_segments = ["Small Sizeable", "Small Medium", "Small Tiny"]
+trip_cols = ["Trip Receivers", "Small Trip Receivers", "Big Trip Receivers"]
+for seg in small_segments:
+    for col in trip_cols:
+        if seg in show_tbl["Segment"].values and col in show_tbl.columns:
+            show_tbl.loc[show_tbl["Segment"] == seg, col] = "-"
+
 # Sort the table by your desired segment order
 show_tbl = show_tbl.set_index("Segment").reindex(segments).reset_index()
 
@@ -151,84 +159,112 @@ defaults_big = {}
 
 if "Small Trip Receivers" in avg_tbl and "Big Trip Receivers" in avg_tbl:
     for seg in avg_tbl["Segment"]:
-        small_val = avg_tbl.loc[avg_tbl["Segment"] == seg, "Small Trip Receivers"].values[0]
-        big_val = avg_tbl.loc[avg_tbl["Segment"] == seg, "Big Trip Receivers"].values[0]
-        # If no receivers (NaN or 0), set to 100000/200000
-        defaults_small[seg] = 300000 if pd.isna(small_val) or small_val == 0 else small_val
-        defaults_big[seg]   = 400000 if pd.isna(big_val)   or big_val == 0 else big_val
+        if seg == "Large":
+            defaults_small[seg] = 150000
+            defaults_big[seg] = 200000
+        elif seg == "Medium":
+            defaults_small[seg] = 100000
+            defaults_big[seg] = 150000
+        elif seg == "Small Sizeable":
+            defaults_small[seg] = 50000
+            defaults_big[seg] = 100000
+        elif seg == "Small Medium":
+            defaults_small[seg] = 40000
+            defaults_big[seg] = 80000
+        elif seg == "Small Tiny":
+            defaults_small[seg] = 20000
+            defaults_big[seg] = 50000
+        else:
+            small_val = avg_tbl.loc[avg_tbl["Segment"] == seg, "Small Trip Receivers"].values[0]
+            big_val = avg_tbl.loc[avg_tbl["Segment"] == seg, "Big Trip Receivers"].values[0]
+            # If no receivers (NaN or 0), set to 100000/200000
+            defaults_small[seg] = 100000 if pd.isna(small_val) or small_val == 0 else small_val
+            defaults_big[seg]   = 200000 if pd.isna(big_val)   or big_val == 0 else big_val
 
 # =========================
 # Sidebar: Global sliders
 # =========================
 st.sidebar.header("Global Cutoffs (override all segments)")
 
-global_small = st.sidebar.slider(
-    "Global Small Trip cutoff (€)",
-    min_value=0, max_value=2_000_000, value=400_000, step=1000,
-    help="Overrides all segment Small Trip cutoffs"
+GLOBAL_MAX = 400_000
+
+# --- Global Small Trip ---
+global_small_slider = st.sidebar.slider(
+    "Global Small Trip cutoff (€) — slider",
+    min_value=0, max_value=GLOBAL_MAX, value=50_000, step=1000,
+    help="Use slider for Small Trip cutoff"
 )
-global_big = st.sidebar.slider(
-    "Global Big Trip cutoff (€)",
-    min_value=0, max_value=2_000_000, value=500_000, step=1000,
-    help="Overrides all segment Big Trip cutoffs"
+global_small_input = st.sidebar.number_input(
+    "Global Small Trip cutoff (€) — input",
+    min_value=0, max_value=GLOBAL_MAX, value=int(global_small_slider), step=1000,
+    help="Type a value for Small Trip cutoff"
 )
+# Synchronize: use the input if changed, else slider
+global_small = global_small_input if global_small_input != global_small_slider else global_small_slider
+
+# --- Global Big Trip ---
+global_big_slider = st.sidebar.slider(
+    "Global Big Trip cutoff (€) — slider",
+    min_value=0, max_value=GLOBAL_MAX, value=100_000, step=1000,
+    help="Use slider for Big Trip cutoff"
+)
+global_big_input = st.sidebar.number_input(
+    "Global Big Trip cutoff (€) — input",
+    min_value=0, max_value=GLOBAL_MAX, value=int(global_big_slider), step=1000,
+    help="Type a value for Big Trip cutoff"
+)
+global_big = global_big_input if global_big_input != global_big_slider else global_big_slider
 
 use_global = st.sidebar.checkbox("Use global cutoffs for all segments", value=False)
 
 # =========================
-# Sidebar sliders (two per segment)
+# Sidebar sliders + input per segment
 # =========================
 st.sidebar.header("Cutoffs per Segment (Revenue €)")
 
 small_cutoffs = {}
 big_cutoffs = {}
 
-def suggested_max_for_segment(seg_df: pd.DataFrame, defaults: list[float]) -> int:
-    m = 1000000
-    return int(max(m, 0))
-
 for seg in segments:
     seg_base = base[base["Size_Segment"] == seg]
     s_def = int(round(float(defaults_small.get(seg, 0) or 0)))
     b_def = int(round(float(defaults_big.get(seg, 0)   or 0)))
-    seg_max = suggested_max_for_segment(seg_base, [s_def, b_def])
+    seg_max = GLOBAL_MAX
 
     with st.sidebar.expander(f"{seg}", expanded=False):
         col_small, col_big = st.columns(2)
 
-        # Small Trip input + slider
+        # Small Trip slider + input
         with col_small:
-            small_val = st.number_input(
-                f"Small Trip cutoff (€) — {seg}",
+            small_slider = st.slider(
+                f"Small Trip cutoff slider — {seg}",
                 min_value=0, max_value=int(seg_max), value=s_def, step=1000,
                 help="Lower bound for Small Trip. Small eligibility is [small, big)."
             )
-        with col_big:
-            small_slider = st.slider(
-                f"Small Trip slider — {seg}",
-                min_value=0, max_value=int(seg_max), value=small_val, step=1000,
+            small_input = st.number_input(
+                f"Small Trip cutoff input — {seg}",
+                min_value=0, max_value=int(seg_max), value=int(small_slider), step=1000,
                 label_visibility="collapsed"
             )
-        # Use global if checked
-        small_cutoffs[seg] = global_small if use_global else (small_slider if small_slider != small_val else small_val)
+            small_val = small_input if small_input != small_slider else small_slider
 
-        col_small2, col_big2 = st.columns(2)
-
-        # Big Trip input + slider
-        with col_small2:
-            big_val = st.number_input(
-                f"Big Trip cutoff (€) — {seg}",
+        # Big Trip slider + input
+        with col_big:
+            big_slider = st.slider(
+                f"Big Trip cutoff slider — {seg}",
                 min_value=0, max_value=int(seg_max), value=b_def, step=1000,
                 help="Lower bound for Big Trip. Also the upper bound for Small Trip."
             )
-        with col_big2:
-            big_slider = st.slider(
-                f"Big Trip slider — {seg}",
-                min_value=0, max_value=int(seg_max), value=big_val, step=1000,
+            big_input = st.number_input(
+                f"Big Trip cutoff input — {seg}",
+                min_value=0, max_value=int(seg_max), value=int(big_slider), step=1000,
                 label_visibility="collapsed"
             )
+            big_val = big_input if big_input != big_slider else big_slider
+
         # Use global if checked
-        big_cutoffs[seg] = global_big if use_global else (big_slider if big_slider != big_val else big_val)
+        small_cutoffs[seg] = global_small if use_global else small_val
+        big_cutoffs[seg] = global_big if use_global else big_val
 
         if small_cutoffs[seg] >= big_cutoffs[seg]:
             st.info("Small cutoff is ≥ Big cutoff. Small eligibility will be empty until you lower it.")
@@ -293,38 +329,38 @@ with col2:
     df_big_show["Cutoff (€)"] = df_big_show["Cutoff (€)"].map(lambda v: f"€ {v:,.0f}")
     st.dataframe(df_big_show, use_container_width=True)
 
-st.subheader("Share of Farms Eligible by Segment")
+# --- Total Prize Cost Section ---
+SMALL_TRIP_COST = 1394
+BIG_TRIP_COST = 2833
 
-chart_small = alt.Chart(res_small).mark_bar().encode(
-    x=alt.X("Segment:N", sort=segments, title="Segment"),
-    y=alt.Y("% of Segment:Q", title="Eligible (%)"),
-    tooltip=[
-        alt.Tooltip("Segment:N"),
-        alt.Tooltip("Cutoff (€):Q", format=",.0f", title="Lower (€)"),
-        alt.Tooltip("Upper (€):Q",  format=",.0f", title="Upper (€)"),
-        alt.Tooltip("Farms Eligible:Q"),
-        alt.Tooltip("Total Farms:Q"),
-        alt.Tooltip("% of Segment:Q")
-    ],
-).properties(height=320)
+total_small_eligible = res_small["Farms Eligible"].sum()
+total_big_eligible = res_big["Farms Eligible"].sum()
+total_small_cost = total_small_eligible * SMALL_TRIP_COST
+total_big_cost = total_big_eligible * BIG_TRIP_COST
+total_cost = total_small_cost + total_big_cost
 
-chart_big = alt.Chart(res_big).mark_bar().encode(
-    x=alt.X("Segment:N", sort=segments, title="Segment"),
-    y=alt.Y("% of Segment:Q", title="Eligible (%)"),
-    tooltip=[
-        alt.Tooltip("Segment:N"),
-        alt.Tooltip("Cutoff (€):Q", format=",.0f", title="Lower (€)"),
-        alt.Tooltip("Farms Eligible:Q"),
-        alt.Tooltip("Total Farms:Q"),
-        alt.Tooltip("% of Segment:Q")
-    ],
-).properties(height=320)
+st.subheader("Total Prize Cost")
 
-tabs = st.tabs(["Small Trip", "Big Trip"])
-with tabs[0]:
-    st.altair_chart(chart_small, use_container_width=True)
-with tabs[1]:
-    st.altair_chart(chart_big, use_container_width=True)
+card_labels = [
+    ("Total of Small Trip Eligible Farms", f"{total_small_eligible:,}"),
+    ("Total of Small Trip Cost", f"€ {total_small_cost:,.0f}"),
+    ("Total of Big Trip Eligible Farms", f"{total_big_eligible:,}"),
+    ("Total of Big Trip Costs", f"€ {total_big_cost:,.0f}"),
+    ("Total Cost of All Trips", f"€ {total_cost:,.0f}")
+]
+
+card_cols = st.columns(5)
+for col, (label, value) in zip(card_cols, card_labels):
+    with col:
+        st.markdown(
+            f"""
+            <div style="border:1px solid #DDD; border-radius:8px; padding:16px; text-align:center; background-color:#FAFAFA;">
+                <span style="font-size:1.1em; color:#666;">{label}</span><br>
+                <span style="font-size:1.5em; font-weight:bold;">{value}</span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
 # =========================
 # Context: actual receivers
