@@ -3,7 +3,7 @@
 import os
 
 # Top-level folder where your data is stored
-DATA_FOLDER = os.path.join("Artea", "data")
+DATA_ROOT = os.path.join("Artea", "data")
 
 # Brands to include in the dashboard
 # BRANDS = ["Swedbank", "Citadele", "Luminor", "SEB", "Artea"]
@@ -17,3 +17,4 @@ BRAND_NAME_MAPPING = {
     "Luminor Lietuva": "Luminor"
 
 }
+
