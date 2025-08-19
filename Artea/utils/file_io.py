@@ -1,33 +1,32 @@
 import os
 import pandas as pd
 import streamlit as st
-
-DATA_ROOT = "data"
+from utils.config import DATA_ROOT  # <-- import here
 
 # ------------------------
 # 📄 Load Agility (News)
 # ------------------------
 @st.cache_data
 def load_agility_data(company_name: str):
-	path = os.path.join(DATA_ROOT, "agility", f"{company_name.lower()}_agility.xlsx")
-	if not os.path.exists(path):
-		return None
-	try:
-		xls = pd.ExcelFile(path)
-		target_sheet = "Raw Data" if "Raw Data" in xls.sheet_names else xls.sheet_names[0]
-		df = pd.read_excel(xls, sheet_name=target_sheet)
-	except Exception as e:
-		st.error(f"[Agility] Error loading {company_name}: {e}")
-		return None
+    path = os.path.join(DATA_ROOT, "agility", f"{company_name.lower()}_agility.xlsx")
+    if not os.path.exists(path):
+        return None
+    try:
+        xls = pd.ExcelFile(path)
+        target_sheet = "Raw Data" if "Raw Data" in xls.sheet_names else xls.sheet_names[0]
+        df = pd.read_excel(xls, sheet_name=target_sheet)
+    except Exception as e:
+        st.error(f"[Agility] Error loading {company_name}: {e}")
+        return None
 
-	# Normalize Published Date column if needed
-	if "Published Date" not in df.columns:
-		for candidate in ["PublishedDate", "published_date", "Date", "date"]:
-			if candidate in df.columns:
-				df = df.rename(columns={candidate: "Published Date"})
-				break
+    # Normalize Published Date column if needed
+    if "Published Date" not in df.columns:
+        for candidate in ["PublishedDate", "published_date", "Date", "date"]:
+            if candidate in df.columns:
+                df = df.rename(columns={candidate: "Published Date"})
+                break
 
-	return df
+    return df
 
 # ------------------------
 # 📱 Load Social Media Data
@@ -106,7 +105,7 @@ def load_social_data(company_name: str, platform: str, use_consolidated: bool = 
 # 🗃️ Load the Actual Volume 
 # ------------------------
 
-AGILITY_METADATA_PATH = os.path.join("data", "agility", "agility_metadata.xlsx")
+AGILITY_METADATA_PATH = os.path.join(DATA_ROOT, "agility", "agility_metadata.xlsx")
 
 def load_agility_volume_map():
 	if os.path.exists(AGILITY_METADATA_PATH):
