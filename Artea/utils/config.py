@@ -3,7 +3,7 @@
 import os
 
 # Top-level folder where your data is stored
-DATA_FOLDER = os.path.join("Artea/data")
+DATA_FOLDER = os.path.join("data")
 
 # Brands to include in the dashboard
 # BRANDS = ["Swedbank", "Citadele", "Luminor", "SEB", "Artea"]
