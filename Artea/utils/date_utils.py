@@ -5,7 +5,7 @@ from calendar import month_name
 
 # Manually define which months are available
 AVAILABLE_MONTHS = [
-    (2025, 2), (2025, 3), (2025, 4), (2025, 5), (2025, 6), (2025, 7)
+    (2025, 2), (2025, 3), (2025, 4), (2025, 5), (2025, 6), (2025, 7), (2025, 8)
 ]
 
 def get_selected_date_range():
