@@ -61,7 +61,6 @@ def render(mode: str = "by_company"):
         df_sent = df_sent.melt(id_vars=["index"], var_name="Sentiment", value_name="Percentage")
         df_sent.columns = ["Company", "Sentiment", "Percentage"]
 
-
     else:  # mode == "combined"
         all_dfs = []
 
@@ -113,3 +112,29 @@ def render(mode: str = "by_company"):
     fig.update_layout(xaxis_title="Company", yaxis_title="Percentage")
 
     st.plotly_chart(fig, use_container_width=True)
+
+    # --- Added: Negative sentiment article topics for Artea (no article numbers) ---
+    if "Artea" in BRANDS:
+        with st.expander("🔎 Negative sentiment article topics for Artea", expanded=False):
+            st.markdown(
+                """
+- **Client frustrations with Artea (multiple cases)**
+  - Unexpected bank fees on account balances.
+  - Complaints spreading on social media about poor treatment of customers.
+  - These are reputational hits tied to service quality and fee transparency.
+- **Broader financial/economic pressure**
+  - Tax changes and economic downturn discussions reflect negatively on banks, with Artea mentioned as an example.
+  - Suggests an association with systemic financial stress, not necessarily misconduct by the bank itself.
+- **Fraud and scams targeting customers**
+  - Several stories about scams and fraud attempts, where criminals impersonated or exploited Artea/Šiaulių bankas customers.
+  - The negativity comes from reputational risk: banks seen as vectors or vulnerable points for fraud.
+- **Šiaulių bankas stock market performance**
+  - Coverage of declining stock value, analyst downgrades, and continued sell-offs.
+  - Tone is negative because of weak market confidence and forecasts of reduced share price.
+- **Artea liquidity/transaction issues**
+  - At least one case of a business unable to retrieve funds for an extended period.
+  - Directly undermines trust in the bank’s operations.
+
+**In short:** Artea is criticized for poor customer service (fees, delays) and linked to fraud risk. Šiaulių bankas is framed negatively in financial press due to declining share value and negative analyst outlooks.
+                """
+            )

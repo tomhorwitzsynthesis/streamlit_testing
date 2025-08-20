@@ -17,7 +17,7 @@ def render():
             st.warning("No analysis data found.")
             return
 
-        # Map keys to display names
+        # Map keys to display names (do NOT exclude "__summary__")
         brand_keys = list(content_pillar_outputs.keys())
         display_names = [BRAND_NAME_MAPPING.get(key, key) for key in brand_keys]
         brand_display_map = dict(zip(display_names, brand_keys))
@@ -30,8 +30,10 @@ def render():
             st.error(data)
             return
 
+        is_summary_brand = str(selected_key).strip().lower() == "__summary__"
+
         for theme in data:
-            st.header(theme['theme'])
+            st.header(theme.get('theme', ''))
 
             for share in theme.get('shares', []):
                 st.markdown(f"**Share:** {share}")
@@ -39,17 +41,26 @@ def render():
             for post in theme.get('posts', []):
                 st.markdown(f"**Post:** {post}")
 
-            col1, col2 = st.columns(2)
-
-            with col1:
-                st.subheader("Subtopics")
-                for subtopic in theme.get('subtopics', []):
-                    st.markdown(f"**{subtopic.get('subtopic', '')}**: {subtopic.get('description', '')}")
-
-            with col2:
+            if is_summary_brand:
+                # For __summary__ brand: no Subtopics; show only Examples full width
                 st.subheader("Examples")
                 for example in theme.get('examples', []):
                     st.markdown(f"- {example}")
+            else:
+                # Original 2-column layout
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    st.subheader("Subtopics")
+                    for subtopic in theme.get('subtopics', []):
+                        name = str(subtopic.get('subtopic', '')).strip()
+                        desc = str(subtopic.get('description', '')).strip()
+                        st.markdown(f"**{name}**: {desc}")
+
+                with col2:
+                    st.subheader("Examples")
+                    for example in theme.get('examples', []):
+                        st.markdown(f"- {example}")
 
     except Exception as e:
         st.error("🚨 Failed to load content pillar analysis.")

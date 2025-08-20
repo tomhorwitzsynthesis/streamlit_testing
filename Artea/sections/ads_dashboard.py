@@ -534,6 +534,11 @@ def render():
     else:
         st.info("No archetype data available. Ensure compos files are in data/ads/compos or Agility files contain 'Top Archetype'.")
 
+
+    st.markdown(
+    'Read more about brand archetypes here: [Brandtypes](https://www.comp-os.com/brandtypes)')
+        
+
     # --- Key Advantages ---
     st.markdown("### Key Advantages")
     key_advantages_data = _load_key_advantages()
@@ -597,6 +602,7 @@ def render():
         barmode="overlay",
         color_discrete_map=_present_color_map(_present),
         category_orders={"brand": BRAND_ORDER},
+        labels={"startDateFormatted": "Month"}
     )
     st.plotly_chart(hist, use_container_width=True)
 
@@ -619,6 +625,7 @@ def render():
             color="brand",
             color_discrete_map=_present_color_map(reach_trend["brand"].unique()),
             category_orders={"brand": BRAND_ORDER},
+            labels={"startDateFormatted": "Month"}
         )
         st.plotly_chart(fig, use_container_width=True, key="total_reach")
 
@@ -636,6 +643,7 @@ def render():
             color="brand",
             color_discrete_map=_present_color_map(ads_trend["brand"].unique()),
             category_orders={"brand": BRAND_ORDER},
+            labels={"startDateFormatted": "Month"}
         )
         st.plotly_chart(fig, use_container_width=True, key="total_ads")
 
@@ -663,6 +671,7 @@ def render():
                     color="brand",
                     color_discrete_map=_present_color_map(pf_reach["brand"].unique()),
                     category_orders={"brand": BRAND_ORDER},
+                    labels={"startDateFormatted": "Month"}
                 )
                 st.plotly_chart(fig, use_container_width=True, key=f"reach_{platform}")
 
@@ -679,6 +688,7 @@ def render():
                     color="brand",
                     color_discrete_map=_present_color_map(pf_ads["brand"].unique()),
                     category_orders={"brand": BRAND_ORDER},
+                    labels={"startDateFormatted": "Month"}
                 )
                 st.plotly_chart(fig, use_container_width=True, key=f"ads_{platform}")
 

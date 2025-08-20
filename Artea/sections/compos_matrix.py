@@ -12,6 +12,10 @@ def render():
     **Note:** News articles were selected from February 1st until July 31st. Only articles where the bank was mentioned in either the title or the first paragraph were kept for analysis.
     """)
 
+    st.markdown("""
+    **Quality definition:** The Brand Mention Quality (BMQ) score is a measure of how well the brand is represented in the article. It takes into account the [PageRank]('https://en.wikipedia.org/wiki/PageRank') of the website, how often the brand is mentioned and where the brand is mentioned in the article. The BMQ score ranges from 0 to 1, where 1 is the best possible score.
+    """)
+
     summary = {}
 
     volume_map = load_agility_volume_map()
