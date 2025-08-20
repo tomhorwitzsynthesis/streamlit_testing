@@ -12,9 +12,13 @@ import ast
 import os
 import glob
 from utils.file_io import load_agility_data
-from utils.config import BRANDS, DATA_ROOT
+from utils.config import BRANDS, DATA_ROOT, BRAND_COLORS
+
+BRAND_ORDER = list(BRAND_COLORS.keys())
+DEFAULT_COLOR = "#BDBDBD"  # used for any brand not in BRAND_COLORS
 
 ADS_COMPOS_DIR = os.path.join(DATA_ROOT, "ads", "compos")
+COMPOS_SUMMARY_PATH = os.path.join(DATA_ROOT, "ads", "compos", "compos_summary.xlsx")
 
 
 def _parse_platforms(val):
@@ -270,6 +274,13 @@ def _format_simple_metric_card(label, val, pct=None, rank_now=None, total_ranks=
         unsafe_allow_html=True,
     )
 
+def _present_color_map(present_brands):
+    m = dict(BRAND_COLORS)
+    for b in present_brands:
+        if b not in m:
+            m[b] = DEFAULT_COLOR
+    return m
+
 
 def render():
 
@@ -296,18 +307,45 @@ def render():
     st.markdown("### Ad Volume Share (Selected Months)")
     sub_tabs = st.tabs(["Number of Ads", "Reach"])
     with sub_tabs[0]:
-        ad_counts = df_filtered['brand'].value_counts().reset_index()
+        ad_counts = df_filtered["brand"].value_counts().reset_index()
         if not ad_counts.empty:
-            ad_counts.columns = ['brand', 'count']
-            fig = px.pie(ad_counts, values='count', names='brand', title=f'Ad Count Share – {start_date.strftime("%b %Y")} to {end_date.strftime("%b %Y")}')
+            ad_counts.columns = ["brand", "count"]
+
+            # Build a color map that covers all present brands (unknowns -> gray)
+            color_map_ads = {**BRAND_COLORS}
+            for b in ad_counts["brand"].unique():
+                color_map_ads.setdefault(b, DEFAULT_COLOR)
+
+            fig = px.pie(
+                ad_counts,
+                values="count",
+                names="brand",
+                title=f'Ad Count Share – {start_date.strftime("%b %Y")} to {end_date.strftime("%b %Y")}',
+                color="brand",
+                color_discrete_map=color_map_ads,
+                category_orders={"brand": BRAND_ORDER},
+            )
             st.plotly_chart(fig, use_container_width=True, key="pie_ads_selected")
         else:
             st.info("No ads in selected months.")
 
     with sub_tabs[1]:
-        reach_totals = df_filtered.groupby('brand')['reach'].sum().reset_index()
+        reach_totals = df_filtered.groupby("brand", as_index=False)["reach"].sum()
         if not reach_totals.empty:
-            fig = px.pie(reach_totals, values='reach', names='brand', title=f'Reach Share – {start_date.strftime("%b %Y")} to {end_date.strftime("%b %Y")}')
+
+            color_map_reach = {**BRAND_COLORS}
+            for b in reach_totals["brand"].unique():
+                color_map_reach.setdefault(b, DEFAULT_COLOR)
+
+            fig = px.pie(
+                reach_totals,
+                values="reach",
+                names="brand",
+                title=f'Reach Share – {start_date.strftime("%b %Y")} to {end_date.strftime("%b %Y")}',
+                color="brand",
+                color_discrete_map=color_map_reach,
+                category_orders={"brand": BRAND_ORDER},
+            )
             st.plotly_chart(fig, use_container_width=True, key="pie_reach_selected")
         else:
             st.info("No reach data in selected months.")
@@ -328,7 +366,7 @@ def render():
     reach_ranks = reach_6m.rank(ascending=False, method="min") if len(reach_6m) else pd.Series(dtype=float)
 
     # Brand strength from compos files in data/ads/compos, fallback to Agility
-    strength_map = _load_brand_strength_from_ads_compos()
+    strength_map = _load_brand_strength_from_summary()
     if not strength_map:
         strength_map = _compute_brand_strength_from_agility()
     if strength_map:
@@ -443,7 +481,7 @@ def render():
 
     # --- Top Archetypes by Company ---
     st.markdown("### Top Archetypes by Company")
-    archetypes_data = _load_top_archetypes_from_ads_compos()
+    archetypes_data = _load_top_archetypes_from_summary()
     if not archetypes_data:
         archetypes_data = _load_top_archetypes_from_agility()
     if archetypes_data:
@@ -550,6 +588,16 @@ def render():
 
     st.markdown("Ad Start Date Distribution")
     hist = px.histogram(df_fixed, x='startDateFormatted', color='brand', nbins=60, barmode='overlay')
+    _present = df_fixed["brand"].unique()
+    hist = px.histogram(
+        df_fixed,
+        x="startDateFormatted",
+        color="brand",
+        nbins=60,
+        barmode="overlay",
+        color_discrete_map=_present_color_map(_present),
+        category_orders={"brand": BRAND_ORDER},
+    )
     st.plotly_chart(hist, use_container_width=True)
 
     st.markdown("### Volume Trends")
@@ -558,34 +606,80 @@ def render():
 
     with tabs[0]:
         st.markdown("#### Reach (Total)")
-        reach_trend = df_fixed.groupby([pd.Grouper(key='startDateFormatted', freq='W'), 'brand'])['reach'].sum().reset_index()
-        fig = px.line(reach_trend, x='startDateFormatted', y='reach', color='brand')
+        reach_trend = (
+            df_fixed
+            .groupby([pd.Grouper(key="startDateFormatted", freq="W"), "brand"])["reach"]
+            .sum()
+            .reset_index()
+        )
+        fig = px.line(
+            reach_trend,
+            x="startDateFormatted",
+            y="reach",
+            color="brand",
+            color_discrete_map=_present_color_map(reach_trend["brand"].unique()),
+            category_orders={"brand": BRAND_ORDER},
+        )
         st.plotly_chart(fig, use_container_width=True, key="total_reach")
 
         st.markdown("#### New Ads (Total)")
-        ads_trend = df_fixed.groupby([pd.Grouper(key='startDateFormatted', freq='W'), 'brand']).size().reset_index(name='ads')
-        fig = px.line(ads_trend, x='startDateFormatted', y='ads', color='brand')
+        ads_trend = (
+            df_fixed
+            .groupby([pd.Grouper(key="startDateFormatted", freq="W"), "brand"])
+            .size()
+            .reset_index(name="ads")
+        )
+        fig = px.line(
+            ads_trend,
+            x="startDateFormatted",
+            y="ads",
+            color="brand",
+            color_discrete_map=_present_color_map(ads_trend["brand"].unique()),
+            category_orders={"brand": BRAND_ORDER},
+        )
         st.plotly_chart(fig, use_container_width=True, key="total_ads")
 
     exploded = df_fixed.copy()
-    exploded['platforms'] = exploded.get('publisherPlatform', exploded.get('platforms', None))
-    exploded['platforms'] = exploded['platforms'].apply(_parse_platforms)
-    exploded = exploded.explode('platforms')
+    exploded["platforms"] = exploded.get("publisherPlatform", exploded.get("platforms", None))
+    exploded["platforms"] = exploded["platforms"].apply(_parse_platforms)
+    exploded = exploded.explode("platforms")
 
     for i, platform in enumerate(platforms):
         with tabs[i + 1]:
             st.markdown(f"#### Reach – {platform}")
-            pf = exploded[exploded['platforms'] == platform]
+            pf = exploded[exploded["platforms"] == platform]
             if pf.empty:
                 st.warning(f"No data available for {platform}.")
             else:
-                pf_reach = pf.groupby([pd.Grouper(key='startDateFormatted', freq='W'), 'brand'])['reach'].sum().reset_index()
-                fig = px.line(pf_reach, x='startDateFormatted', y='reach', color='brand')
+                pf_reach = (
+                    pf.groupby([pd.Grouper(key="startDateFormatted", freq="W"), "brand"])["reach"]
+                    .sum()
+                    .reset_index()
+                )
+                fig = px.line(
+                    pf_reach,
+                    x="startDateFormatted",
+                    y="reach",
+                    color="brand",
+                    color_discrete_map=_present_color_map(pf_reach["brand"].unique()),
+                    category_orders={"brand": BRAND_ORDER},
+                )
                 st.plotly_chart(fig, use_container_width=True, key=f"reach_{platform}")
 
                 st.markdown(f"#### New Ads – {platform}")
-                pf_ads = pf.groupby([pd.Grouper(key='startDateFormatted', freq='W'), 'brand']).size().reset_index(name='ads')
-                fig = px.line(pf_ads, x='startDateFormatted', y='ads', color='brand')
+                pf_ads = (
+                    pf.groupby([pd.Grouper(key="startDateFormatted", freq="W"), "brand"])
+                    .size()
+                    .reset_index(name="ads")
+                )
+                fig = px.line(
+                    pf_ads,
+                    x="startDateFormatted",
+                    y="ads",
+                    color="brand",
+                    color_discrete_map=_present_color_map(pf_ads["brand"].unique()),
+                    category_orders={"brand": BRAND_ORDER},
+                )
                 st.plotly_chart(fig, use_container_width=True, key=f"ads_{platform}")
 
     # --- Top 5 Product Types Section ---
@@ -710,6 +804,36 @@ def render():
                         st.markdown(f"- {info['Unique Education Initiatives']}")
 
     # Text analysis and new campaigns sections can be added later as optional blocks
+
+def _load_top_archetypes_from_summary():
+    if not os.path.exists(COMPOS_SUMMARY_PATH):
+        return {}
+    df = pd.read_excel(COMPOS_SUMMARY_PATH)
+    archetypes = {}
+    for col in df.columns:
+        vc = df[col].dropna().value_counts()
+        total = int(vc.sum()) if vc.sum() else 0
+        top3 = vc.head(3)
+        items = []
+        for archetype, count in top3.items():
+            pct = (count / total) * 100 if total > 0 else 0
+            items.append({'archetype': archetype, 'percentage': pct, 'count': int(count)})
+        if items:
+            archetypes[col] = items
+    return archetypes
+
+def _load_brand_strength_from_summary():
+    if not os.path.exists(COMPOS_SUMMARY_PATH):
+        return {}
+    df = pd.read_excel(COMPOS_SUMMARY_PATH)
+    strength = {}
+    for col in df.columns:
+        vc = df[col].dropna().value_counts()
+        total = int(vc.sum()) if vc.sum() else 0
+        if total > 0:
+            dominant = vc.iloc[0]
+            strength[col] = (dominant / total) * 100
+    return strength
 
 
 

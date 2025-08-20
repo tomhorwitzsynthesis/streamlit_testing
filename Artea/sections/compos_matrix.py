@@ -8,6 +8,10 @@ from utils.date_utils import get_selected_date_range  # Add this import
 def render():
     st.subheader("🏷️ Brand Archetypes: Volume vs. Quality")
 
+    st.markdown("""
+    **Note:** News articles were selected from February 1st until July 31st. Only articles where the bank was mentioned in either the title or the first paragraph were kept for analysis.
+    """)
+
     summary = {}
 
     volume_map = load_agility_volume_map()
@@ -78,3 +82,7 @@ def render():
     )
 
     st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown(
+        'Read more about brand archetypes here: [Brandtypes](https://www.comp-os.com/brandtypes)'
+    )

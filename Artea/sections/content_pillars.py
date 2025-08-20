@@ -33,22 +33,22 @@ def render():
         for theme in data:
             st.header(theme['theme'])
 
-            for share in theme['shares']:
+            for share in theme.get('shares', []):
                 st.markdown(f"**Share:** {share}")
 
-            for post in theme['posts']:
+            for post in theme.get('posts', []):
                 st.markdown(f"**Post:** {post}")
 
             col1, col2 = st.columns(2)
 
             with col1:
                 st.subheader("Subtopics")
-                for subtopic in theme['subtopics']:
-                    st.markdown(f"**{subtopic['subtopic']}**: {subtopic['description']}")
+                for subtopic in theme.get('subtopics', []):
+                    st.markdown(f"**{subtopic.get('subtopic', '')}**: {subtopic.get('description', '')}")
 
             with col2:
                 st.subheader("Examples")
-                for example in theme['examples']:
+                for example in theme.get('examples', []):
                     st.markdown(f"- {example}")
 
     except Exception as e:
