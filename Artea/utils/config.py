@@ -3,7 +3,7 @@
 import os
 
 # Top-level folder where your data is stored
-DATA_ROOT = os.path.join("data")
+DATA_ROOT = os.path.join("Artea", "data")
 
 # Brands to include in the dashboard
 # BRANDS = ["Swedbank", "Citadele", "Luminor", "SEB", "Artea"]
@@ -23,4 +23,5 @@ BRAND_COLORS = {
     "Luminor Lietuva":    "#FF0E0E",  # Plotly Orange-Red
     "Citadele bankas":    "#FF9896",  # Light Red / Pink
     "Artea":              "#BECFE6",  # Light Blue
+
 }
