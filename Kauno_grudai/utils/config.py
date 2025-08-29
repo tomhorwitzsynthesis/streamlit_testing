@@ -3,7 +3,7 @@
 import os
 
 # Top-level folder where your data is stored
-DATA_ROOT = os.path.join("Kauno grudai","data")
+DATA_ROOT = os.path.join("Kauno_grudai","data")
 
 # Brands to include in the dashboard (normalized display names)
 BRANDS = ["Acme", "Ignitis", "Kauno grūdai", "SBA", "Thermo Fisher"]
@@ -58,4 +58,5 @@ BRAND_COLORS = {
     "Kauno grūdai": "#FF0E0E",
     "SBA": "#FF9896",
     "Thermo Fisher": "#BECFE6",
+
 }
