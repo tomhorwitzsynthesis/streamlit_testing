@@ -45,7 +45,7 @@ def load_agility_data(company_name: str):
             target_sheet = "Raw Data" if "Raw Data" in xls.sheet_names else xls.sheet_names[0]
             df = pd.read_excel(xls, sheet_name=target_sheet)
             # Filter by Brand variants if a brand/company column exists
-            brand_col = None
+            brand_col = "company"
             for c in df.columns:
                 cname = str(c).strip().lower()
                 if "brand" in cname or "company" in cname:

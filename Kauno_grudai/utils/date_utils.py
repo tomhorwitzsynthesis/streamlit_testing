@@ -4,6 +4,11 @@ from datetime import datetime
 from calendar import month_name
 
 # Manually define which months are available
+# AVAILABLE_MONTHS = [
+#     (2024, 8), (2024, 9), (2024, 10), (2024, 11), (2024, 12), (2025, 1),
+#     (2025, 2), (2025, 3), (2025, 4), (2025, 5), (2025, 6), (2025, 7), (2025, 8)
+# ]
+
 AVAILABLE_MONTHS = [
     (2025, 2), (2025, 3), (2025, 4), (2025, 5), (2025, 6), (2025, 7), (2025, 8)
 ]
