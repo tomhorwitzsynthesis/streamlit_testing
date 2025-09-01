@@ -15,6 +15,8 @@ from sections.content_pillars import render as render_content_pillars
 
 from sections.audience_affinity import render as render_audience_affinity
 from sections.ads_dashboard import render as render_ads_dashboard
+from sections.pr_ranking import render as render_pr_ranking
+from sections.social_media_ranking import render as render_social_media_ranking
 
 #from sections.content_pillar_analysis import render as render_pillars  # If implemented
 # from sections.audience_affinity import render as render_affinity     # Optional
@@ -35,6 +37,7 @@ init_month_selector()  # Sets start_date / end_date globally
 if section == "Press Releases":
     st.title("📰 Press Release Dashboard")
     render_matrix()
+    render_pr_ranking()
     render_sentiment(mode="by_company")
     render_topics()
     render_volume(mode="by_company")
@@ -42,6 +45,7 @@ if section == "Press Releases":
 
 elif section == "Social Media":
     st.title("📱 Social Media Dashboard")
+    render_social_media_ranking()
     render_social_trends(selected_platforms=["linkedin", "facebook"])
     render_top_posts(selected_platforms=["linkedin", "facebook"])
 
