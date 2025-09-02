@@ -278,7 +278,7 @@ def render():
                 delta_mean_pct = ((total_engagement - (engagement_mean if engagement_mean != 0 else 1)) / (engagement_mean if engagement_mean != 0 else 1)) * 100 if engagement_mean != 0 else 0
                 rank_now = engagement_ranks.get(brand_name, None) if len(engagement_ranks) else None
                 _format_simple_metric_card(
-                    label="Social Media Engagement",
+                    label="Engagement",
                     val=f"{total_engagement:,}",
                     pct=delta_mean_pct,
                     rank_now=rank_now,

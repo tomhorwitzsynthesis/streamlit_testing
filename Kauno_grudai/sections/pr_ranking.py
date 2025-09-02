@@ -257,7 +257,7 @@ def render():
                 delta_mean_pct = ((total_reach - (reach_mean if reach_mean != 0 else 1)) / (reach_mean if reach_mean != 0 else 1)) * 100 if reach_mean != 0 else 0
                 rank_now = reach_ranks.get(brand_name, None) if len(reach_ranks) else None
                 _format_simple_metric_card(
-                    label="PR Reach (Impressions)",
+                    label="Reach",
                     val=f"{total_reach:,}",
                     pct=delta_mean_pct,
                     rank_now=rank_now,

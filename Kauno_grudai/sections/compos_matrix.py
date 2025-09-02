@@ -22,19 +22,23 @@ def render():
         if df is None or df.empty:
             continue
 
-        # Filter by selected date range
+        # Filter by selected date range for volume and quality only
         if "Published Date" in df.columns:
             df["Published Date"] = pd.to_datetime(df["Published Date"], errors="coerce")
             df = df.dropna(subset=["Published Date"])
-            df = df[(df["Published Date"] >= start_date) & (df["Published Date"] <= end_date)]
+            df_filtered = df[(df["Published Date"] >= start_date) & (df["Published Date"] <= end_date)]
+        else:
+            df_filtered = df
 
-        volume = len(df)  # Use filtered count
-        quality = df["BMQ"].mean() if "BMQ" in df.columns and not df.empty else 0
+        volume = len(df_filtered)  # Use filtered count
+        quality = df_filtered["BMQ"].mean() if "BMQ" in df_filtered.columns and not df_filtered.empty else 0
 
+        # Top 3 archetypes: use ALL data, not date-filtered
         if "Top Archetype" in df.columns and not df.empty:
-            archetype_counts = df["Top Archetype"].value_counts(normalize=True) * 100
-            top_3 = archetype_counts.nlargest(3)
-            archetype_text = "<br>".join([f"{a} ({p:.1f}%)" for a, p in top_3.items()])
+            vc = df["Top Archetype"].dropna().value_counts()
+            total = int(vc.sum()) if vc.sum() else 0
+            top3 = vc.head(3)
+            archetype_text = "<br>".join([f"{a} ({(count/total*100 if total>0 else 0):.1f}%)" for a, count in top3.items()])
         else:
             archetype_text = "N/A"
 
