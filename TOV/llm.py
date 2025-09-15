@@ -16,13 +16,29 @@ from typing import Dict, Any, Optional, Tuple
 import requests
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Try to load environment variables from .env file (for local development)
+try:
+    load_dotenv()
+except:
+    pass  # .env file not found, will use Streamlit secrets
 
-DEFAULT_MODEL = os.getenv("LLM_MODEL", "gpt-4o")
-BASE_URL = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
-API_KEY = os.getenv("OPENAI_API_KEY")
-TIMEOUT_SECONDS = float(os.getenv("LLM_TIMEOUT", "20"))
+def _get_secret(key: str, default: str = None) -> str:
+    """Get secret from Streamlit secrets or environment variables with fallback."""
+    try:
+        import streamlit as st
+        # Try Streamlit secrets first (for cloud deployment)
+        if hasattr(st, 'secrets') and key in st.secrets:
+            return st.secrets[key]
+    except:
+        pass
+    
+    # Fallback to environment variables (for local development)
+    return os.getenv(key, default)
+
+DEFAULT_MODEL = _get_secret("LLM_MODEL", "gpt-4o")
+BASE_URL = _get_secret("OPENAI_BASE_URL", "https://api.openai.com/v1")
+API_KEY = _get_secret("OPENAI_API_KEY")
+TIMEOUT_SECONDS = float(_get_secret("LLM_TIMEOUT", "20"))
 
 
 def _estimate_tokens(text: str) -> int:
