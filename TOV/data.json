@@ -1,0 +1,603 @@
+{
+  "schema_version": 1,
+  "guidelines": {
+    "content": "# Language & tone guidelines\n\n### Do’s & Don’ts\n\n| ✅ **Do** | ❌ **Don’t** |\n| --- | --- |\n| **Speak with calm, grounded confidence**\n*“Built to scale, with no drop in performance.”* | **Avoid hype or overclaims**\n*“Our groundbreaking technology is revolutionising payments!”* |\n| **Prioritise clarity over cleverness**\n*“Accept payments. Track performance. Optimise as you grow.”* | **Avoid generic slogans**\n*“Your business, but better.”* |\n| **Empower the user**\n*“Set payout thresholds per region. Then change them anytime.”* | **Avoid passive or subjectless phrasing**\n*“Payout thresholds can be adjusted in the dashboard.”* |\n| **Be precise and specific**\n*“Real-time settlement status, dispute tools, and card insights, all in one view.”* | **Avoid empty category clichés***“Everything you need in one seamless solution.”* |\n| **Sound like a person, not a pitch**\n*“Need help setting this up? We’ll walk you through it.”* | **Don’t use jargon or robotic phrasing**\n*“Our onboarding journey has been optimised for stakeholder success.”* |\n\n---\n\n### Phrasing patterns and examples\n\nUse these patterns to build sentences that reflect payabl.’s voice and support specific writing tasks. \n\n**Instruction**\n\n**Goal:** Tell the user what to do: clearly, directly, and without extra framing.\n\n**How:** Start with a verb. Break into steps if needed. Avoid overexplaining.\n\n- *“Link your account. Then verify your identity.”*\n- *“Select a region. Set your payout threshold.”*\n- *“Export the report as CSV.”*\n\n**Enablement**\n\n**Goal:** Show what the user can control or customise.\n\n**How:** Make the user the subject. Use verbs that signal control (set, choose, adjust).\n\n- *“Set limits per card — or freeze them anytime.”*\n- *“Choose which users can issue virtual cards.”*\n- *“Adjust your payout schedule per market.”*\n\n**Explanation**\n\n**Goal:** Clarify what something does or how it works.\n\n**How:** Use simple language. Short clauses. Focus on outcome, not tech.\n\n- *“payabl.one brings your payments, banking and fraud tools into one dashboard.”*\n- *“VAMP monitors fraud signals in real time, across all transactions.”*\n- *“Your virtual cards sync automatically with your business account.”*\n\n**Differentiation**\n\n**Goal:** Show how payabl. is different without sounding defensive or exaggerated.\n\n**How:** Use contrast, specificity, or proof. Don’t oversell.\n\n- *“Not just seamless. Actually stable.”*\n- *“Unlike others, we show real-time settlement data — not estimates.”*\n- *“While others sell speed, we give you control.”*\n\n**Reassurance**\n\n**Goal:** Build confidence in reliability, compliance, or support.\n\n**How:** Be factual and calm. Emphasise consistency and visibility.\n\n- *“You can monitor every transaction 24/7.”*\n- *“You’ll see every dispute, every status, in one place.”*\n- *“All data stays within EU infrastructure.”*\n\n**Motivation / CTA**\n\n**Goal:** Prompt an action — to set up, explore, contact, upgrade, etc.\n\n**How:** Use action + benefit. Keep it low-friction and user-led.\n\n- *“Get started in minutes — no integration needed.”*\n- *“Explore payout controls.”*\n- *“Talk to an expert.”*\n\n---\n\n## **Vocab and Style Preferences**\n\nThis section defines the functional language standards that ensure consistency across all payabl. content. It covers naming conventions, punctuation, grammar, and usage.\n\n### **1. Product naming conventions**\n\nAll product names follow a **consistent, descriptive format** that reflects payabl.’s commitment to clarity and simplicity. Each name communicates what the product is or does, without jargon or abstraction.\n\n### **Format:**\n\n**payabl.** + **descriptor** (functional noun or noun phrase, lowercase)\n\npayabl. should ALWAYS be fully lower case, also at the start of a sentence:\n\nDO: payabl. is the leading....\nDON'T: Payabl. is the leading...\n\n| Example | Refers to |\n| --- | --- |\n| **payabl. checkout** | Online payment gateway (acquiring) |\n| **payabl. in-store** | Point-of-sale (POS) payments |\n| **payabl. business accounts** | Business banking functionality |\n| **payabl. virtual business cards** | Corporate expense cards |\n| **payabl. card manager** | Interface for managing virtual cards |\n| **payabl. crypto** | Crypto payment and settlement tools |\n| **payabl.one** | Unified platform across all services |\n\n### **Sub-features format:**\n\nUse the structure **\"[feature] by payabl.\"** for sub-products under broader categories.\n\nE.g.:\n\n- *Stablecoin settlements by payabl.*\n- *Acquiring by payabl.*\n\n> Always retain the dot in payabl. — it is part of the brand, not optional.\n> \n\n### **2. Capitalisation and Formatting Rules**\n\n- Use **sentence case** for all UI elements, buttons, CTAs, and headlines.\n    \n    E.g. “View transactions”, not “View Transactions”\n    \n- **Never use camelCase** **or PascalCase** for product names.\n    \n    ✅ *payabl.one*\n    \n    ❌ *payablOne*, *PayablOne*\n    \n\n### **3. Use of abbreviations**\n\nUse abbreviations only when they are widely recognised and functionally necessary. Do not introduce unexplained or internal acronyms.\n\n| Approved abbreviations | Use notes |\n| --- | --- |\n| API | Application Programming Interface |\n| POS | Point-of-sale (contextual, not branded) |\n| CSV | File format reference |\n| SEPA | Single Euro Payments Area |\n| SDK | Software Development Kit |\n| AMEX | American Express |\n\n> Avoid inventing new acronyms or abbreviating product names. Never abbreviate payabl. checkout, payabl. crypto, etc.\n> \n\n### **4. Pluralisation Rules**\n\n- Use **plural terms** when referring to categories, collections, or general functionality.\n    \n    ✅ *virtual business cards*, *payments*, *disputes*\n    \n- Use **singular** only for individual items or actions.\n    \n    ✅ *Make a payment*, *freeze a card*\n    \n\n> \"payment\" vs. \"payments\"\n> \n> - Use **payment** for a single transaction\n> - Use **payments** when referring to the industry, a system, or multiple transactions\n\n**Correct examples:**\n\n- \"Our platform supports various payments solutions.\"\n- \"Please confirm that the payment was received.\"\n- \"2025 commerce and payments trends report\"\n\n### **5. Approved terminology**\n\nUse consistent terms aligned with how our products work and how our users think.\n\n| Use | Avoid |\n| --- | --- |\n| Fintech (industry context) | Paytech |\n| Merchants (our clients) | Customers (refers to their users) |\n| Business accounts | Banking |\n| In-store | POS (except in product naming) |\n| Checkout | Gateway |\n| Real-time | Instantaneous |\n| Set / Adjust | Configure |\n| Overview | Snapshot |\n| Support | Concierge, success team |\n\n---\n\n## **Writing Style**\n\nWriting at payabl. is structured for clarity, powered by verbs, and easy to absorb. Our sentences do more than inform, they guide. Always aim for flow, not filler.\n\n### **Structure & syntax**\n\n- **One idea per sentence.** Don’t stack clauses. Keep the subject clear and upfront.\n    \n    ✅ “Export your transaction data. Then reconcile by region.”\n    \n    ❌ “Export data and reconcile it per region, depending on your setup.”\n    \n- **Lead with action.** Use verbs to show control or progress.\n    \n    ✅ “Set payout rules. Adjust them anytime.”\n    \n    ❌ “Payouts can be configured via the dashboard.”\n    \n- **Cut qualifiers.** Don’t hedge with “can”, “might”, “helps to”, or “allows you to” unless technically required.\n    \n    ✅ “Freeze any card instantly.”\n    \n    ❌ “Our platform allows you to freeze cards.”\n    \n- **Frontload the value.** Put what matters first. Don’t bury benefits in technical framing.\n    \n    ✅ “Track settlements in real time.”\n    \n    ❌ “Our dashboard includes a feature that helps users track settlements.\n    \n\n### **Punctuation and grammar**\n\n- **Avoid exclamation marks.** Let confidence come from clarity, not excitement.\n- **Use sentence case.** Applies to UI, CTAs, headlines, and emails.\n- **Keep punctuation clean.** Use em dashes (—) with space on both sides. Avoid ellipses. Use colons sparingly.\n- **Use contractions where natural.** They keep tone human: “you’ll”, “we’re”, “it’s”.\n\n### **Word choice**\n\n- **Prefer direct verbs.** Write “adjust”, not “manage”; “view”, not “access”.\n- **Avoid tech-jargon.** Say what something *does*, not what it’s *built with*.\n    - ✅ “Your card data updates instantly.”\n    - ❌ “Powered by real-time syncing technology.”\n- **Be specific.** Don’t say “feature” or “solution” if you can name the actual function.\n    - ✅ “Set spending limits.”\n    - ❌ “Use our expense control solution.”\n    \n\n## **Preferred terms**\n\n| **Use (*in relation to payabl.)** | **Don't use (*in relation to payabl.)** |\n| --- | --- |\n| Fintech* | Paytech* |\n| Merchants* (for our customers) | Customers* (these are our merchants’ end users) |\n| and | & |\n| Business accounts* | Banking* |\n\n**\"payment\" vs. \"payments\"** \n\n- Use **payment** when referring to a specific transaction.\n- Use **payments** when discussing the industry, multiple transactions, or general concepts related to transferring funds.\n\n**Examples:**\n\n- \"Payment\" (singular): refers to a single transaction or the act of transferring a specific sum of money.\n- Please confirm that the payment was received.\n- He made a payment of €100.\n- \"Payments\" (plural): refers to the industry as a whole, multiple transactions, or the general concept of transferring funds.\n- The payments industry is evolving rapidly.\n- Our platform supports various payments solutions.\n\n**Common contexts**\n\n**Industry reports:**\n\n- Incorrect: \"2025 commerce and payment trends report\"\n- Correct: \"2025 commerce and payments trends report\"\n\n**Service descriptions:**\n\n- Incorrect: \"Our company offers innovative payment solutions.\"\n- Correct: \"Our company offers innovative payments solutions.\"\n\n**General statements:**\n\n- Incorrect: \"Advancements in payment technology are impressive.\"\n- Correct: \"Advancements in payments technology are impressive.\"\n\n---\n\n### **3. Tone Examples by Use-Case Area**\n\n### **01 Marketing**\n\n**Value discovery through interest.** In this area, we focus on our brand awareness and aim to communicate to merchants often before they think about switching or even attempt solve a specific problem. The goal is to spark interest and signal relevance. Not with hype, but with control.\n\n**Tone Calibration**\n\n✅ Be confident, lightly distinctive: let clarity and specificity do the work.\n\n- Example: “Checkout to payout — all in one view.”\n\n❌ Avoid being loud or promotional: no hype, cleverness, or forced energy\n\n- Example: “Revolutionising the way you pay.”\n\n**Message Development Angles**\n\n**Frame the problem:** show that we understand the merchant’s pain points\n\n- Example: “Scaling across markets shouldn’t mean switching providers.”\n\n**Show the relevance:** connect our features to what merchants care about (control, visibility, simplicity)\n\n- Example: “Control payouts by region. Adjust anytime.”\n\n**Invite exploration:** spark curiosity and show we’re worth a closer look\n\n- Example: “Built for merchants who outgrow shortcuts.”\n\n**Pitfalls to Avoid**\n\n| **Pitfall** | **Definition** | ❌ **Bad Example** | ✅ **Better Alternative** |\n| --- | --- | --- | --- |\n| **Generic slogans** | Vague, feel-good statements with no substance | “Powering business growth.” | “Track performance and unlock new payout routes as you scale.” |\n| **Overclaims** | Inflated language that damages trust | “Our revolutionary platform changes everything.” | “Get real-time visibility on every transaction — without switching tabs.” |\n| **Category clichés** | Buzzwords used without evidence | “A seamless, end-to-end payment solution.” | “One dashboard. Checkout, banking and fraud tools — side by side.” |\n\n**How does it apply in specific contexts?** \n\n|  | **Website hero and subheads** | **Ad hooks** | **Social media posts** |\n| --- | --- | --- | --- |\n| Role | Make the value immediately clear. Frame the offer with confidence and precision. | Capture attention in tight space. Surface one sharp benefit or contrast. | Start or join a conversation. Show relevance or offer a glimpse of a feature or mindset. |\n| ✅ Do | Lead with benefit or differentiator. Use structural contrast (e.g. “X without Y”). | Use contrast or tension. Be punchy but grounded. | Be human, observant, product-aware. Add clarity to the feed. |\n| ❌ Don’t | Open with product category or technical descriptors. Avoid slogans or soft adjectives. | Shout. Avoid hype language or generic claims. | Sound corporate or use filler (“Excited to announce…”). Skip hashtags unless functional. |\n| 🗣️ Voice prompt | “Say what it does, not what it is.” | “Say something real in a way that stands out quietly.” | “Speak like a smart operator, not a brand.” |\n| Example | Hero: “Make your money flow.”\n\nSubhead: “Observe, follow, and control your payments.” | “Not just seamless. Actually reliable.” | “Set card limits by region. Adjust anytime. Assume control over payments.” |\n\n### **02 Sales**\n\n**Conversion facilitation through clarity.** In this area, we speak to merchants who are actively evaluating vendors or considering switching. They’re assessing whether we fit their technical and operational needs. Our role is to help them understand how we’re different — not louder, but sharper, steadier, and more complete.\n\n**Tone Calibration**\n\n✅ Be assertive, grounded, and factual: show capability without puffery, making control, performance, and flexibility visible.\n\n- Example: “Built for payments control. Delivered with support and expertise.”\n\n❌ Avoid vague promises or inflated positioning: don’t rely on “platform” language or tech buzzwords.\n\n- Example: “An advanced, all-in-one payment stack built for the future.”\n\n**Message Development Angles**\n\n**Frame the decision**: clarify what they’re choosing, and why it matters.\n\n- Example: “We show real-time settlement data, not estimates.”\n\n**Prove differentiation**: be specific in contrast. Control, visibility, flexibility, onboarding — show our edge.\n\n- Example: “Direct API integration. Custom onboarding. No switching costs.”\n\n**De-risk the switch**: show how we handle complexity (verticals, compliance, reconciliation, fraud).\n\n- Example: “High-risk verticals? We do onboarding, compliance, and live fraud monitoring.”\n\n**Pitfalls to Avoid**\n\n| **Pitfall** | **Definition** | **❌ Bad Example** | **✅ Better Alternative** |\n| --- | --- | --- | --- |\n| Vague claims | Statements that sound good but say little | “The complete payment solution.” | “Accept payments. Track disputes. Settle instantly. Acquiring to payouts.” |\n| Over-engineering | Overly technical or complex language | “Modular architecture and unified orchestration layers.” | “One dashboard. Add features, remove them, control how money flows.” |\n| Soft persuasion | Language that assumes intent without proof | “Thousands of merchants trust us.” | “Used by merchants in high-risk sectors for fraud prevention and control.” |\n\n**How does it apply in specific contexts?**\n\n|  | **One-pager headlines** | **Email openers** | **Conference booths** |\n| --- | --- | --- | --- |\n| Role | Signal the tangible differentiation. | Connect offer to known pain point — and fast.  | Own a benefit in 5–6 words. |\n| ✅ Do | Highlight differentiator with clarity. Pair strength with stability. | Start with the problem. Show how we resolve it. | Build on main value proposition. |\n| ❌ Don’t | Talk about “solutions” or “platforms” without specifics. | Lead with greetings, fluff, or intros. | Overuse industry jargon or try to sound “innovative.” |\n| 🗣️ Voice prompt | “Say how we’re different — and why that matters.” | “Speak to the problem they’re already facing.” | “If you had one sentence, make it count.” |\n| Example | “Built on hands-on experience in payments. Applied to your business case.” | “Expanding fast? We’re here to help with our global payments expertise. Stay in control when things scale — from acquiring to payouts.” | “Your money flow starts here.” |\n\n### 03 Editorial\n\n**Thought leadership with genuine proof.** In this area, we speak to merchants who are curious, skeptical, and information-driven. They’re looking for insight. Our role is to help them understand what’s changing, what matters, and what they can do. With real examples, real signals, and real language.\n\n**Tone Calibration**\n\n✅ Be expert, composed, and analytical: speak with authority but never preach. Build on operational bottlenecks, questions and pain-points.\n\n- Example: “What merchants need to stay compliant and in control.”\n\n❌ Avoid performance or over-stylisation: don’t dramatise trends, inflate conclusions and speculate on abstract problems.\n\n- Example: “The future of payments is here — are you ready?”\n\n**Message Development Angles**\n\n**Frame the trend**: isolate a real change in the industry and explain why it matters.\n\n- Example: “In 2024, dispute rates rose across EU markets — except for merchants using real-time chargeback tracking.”\n\n**Distill the insight:** go beyond observation. Show the underlying cause or consequence.\n\n- Example: “Higher fraud flagging often correlates with weak card issuer visibility: is BIN to blame for rising false positive rates?”\n\n**Ground it in merchant context:** tie trends to the reader’s reality — not theory.\n\n- Example: “For FX platforms, reconciliation gaps typically emerge with growing volumes — how to ensure post-launch resilience?”\n\n**Pitfalls to avoid**\n\n| **Pitfall** | **Definition** | **❌ Bad Example** | **✅ Better Alternative** |\n| --- | --- | --- | --- |\n| **Over-stylised headlines** | Prioritising tone over clarity | “The great merchant reckoning of 2025” | “Why dispute rates are rising — and how to act?” |\n| **Vague thought leadership** | Saying things without evidence or direction | “It’s time to rethink payments.” | “Merchant control is shifting from banks to platforms: usage surges by 23%” |\n| **Corporate tone** | Sounds like internal PR, not usable insight | “Our mission is to empower merchant success.” | “Real-time data helped one merchant cut refund times by 32%.” |\n\n**How does it apply in specific contexts?**\n\n|  | **Blog headlines** | **Report titles** | **Episode titles** | **Lead paragraphs** |\n| --- | --- | --- | --- | --- |\n| Role | Capture a clear question, signal relevance. | Pair scope with value, lead to learning outcomes. | Frame a story or shift in the market. | Set context fast, bridge the change with what’s next.  |\n| ✅ Do | Lead with what’s changing. Keep it sharp. | Quantify where possible. Stay specific. | Use real terms — no metaphors or fluff. | Anchor in data or experience. Do not tease. Reveal impact. |\n| ❌ Don’t | Use stylised metaphors or overstate the urgency. | Use broad themes or empty predictions. | Sound like a podcast trailer or startup teaser. | Linger on warming up. Don’t delay the point. |\n| 🗣️ Voice prompt | “What’s the shift and why should merchants care?” | “Say what’s in the report, not what it represents.” | “State the story, not the sentiment.” | “Start with the tension. End with what we’ll unpack.” |\n| Example | “Virtual cards simplify reconciliation across teams: how to implement them in your payments stack.” | “From Checkout to Settlement: Operational Metrics from 1B+ Transactions” | “The Invisible Cost of Delay: Why Onboarding Speed Matters More Than Ever” | “Chargeback thresholds are tightening. With regulators and card networks watching closely, even low-risk sectors are under pressure to respond faster.” |\n\n### **04 Client Engagement**\n\n**Post-sale nurturing through empowerment**. In this area, we speak to existing merchants through onboarding, product updates, and usage. They’re already in, but they’re busy. Our role is to help them make full use of payabl. without pressure of complexity. We show what’s new, what’s next, or what’s missed.\n\n**Tone Calibration**\n\n✅ Be helpful, minimal, and user-aware: show the next step, not the whole journey.\n\n- Example: “Welcome to payabl. You’re in control from day one: let’s start with this dashboard overview.”\n\n❌ Avoid support-speak or unnecessary warmth: don’t use greetings, “hope you’re well,” or service clichés.\n\n- Example: “We hope you’re well! Just a follow-up to ensure your onboarding experience is seamless.”\n\n**Message Development Angles**\n\n**Show what they can do:** give merchants a quick win, clear setting, or immediate action.\n\n- Example: “Set card limits by market. Adjust in one step.”\n\n**Announce what’s changed:** introduce new features or updates in factual, user-relevant language.\n\n- Example: “Refund receipts now live. Track your returns in real time.”\n\n**Nudge what’s underused:** highlight underutilised features calmly, with a soft prompt to explore.\n\n- Example: “Not using payout rules yet? Here’s a 2-minute setup guide. Or find more information in our knowledge base.”\n\n**Pitfalls to Avoid**\n\n| **Pitfall** | **Definition** | **❌ Bad Example** | **✅ Better Alternative** |\n| --- | --- | --- | --- |\n| **Overly casual tone** | Attempts to be chatty or overly friendly | “Hey there! 👋 Just checking in to see how it’s going.” | “Need to issue cards? Here’s where to start.” |\n| **Service-speak** | Formal, generic customer support tone | “We’re reaching out to inform you about an update to our platform.” | “We’re updating our platform. Your operations will not be affected.” |\n| **Unfocused intros** | Wasting space before the value | “We hope you’re enjoying the platform and finding it useful.” | “Dispute tools are now available in your dashboard.” |\n\n**How does it apply in specific contexts?**\n\n|  | **Onboarding email openers** | **Feature announcements** | **Nudges** |\n| --- | --- | --- | --- |\n| Role | Help merchants take control from day one | Communicate product updates clearly and calmly | Remind users of underused features without pressure |\n| ✅ Do | Anchor in what they can do now | Lead with what’s changed, then why it matters | Offer a single action or benefit — and a quick way in |\n| ❌ Don’t | Welcome with platitudes or instructions buried in text | Frame updates as marketing news or internal success | Guilt-trip or imply failure to engage |\n| 🗣️ Voice prompt | “You’re live. Show them what they can control.” | “Say what’s new — and why it helps.” | “Remind, don’t push.” |\n| Example | “Welcome to payabl.one — your view of everything from checkout to chargebacks” | “Dispute visibility has improved. You’ll now see chargebacks and statuses in one place” | “You may benefit by using payout rules. Want a quick guide?” |\n\n### Overview\n\n|  | **Marketing** | **Sales** | **Editorial** | **Client Engagement** |\n| --- | --- | --- | --- | --- |\n| Focus area | Value discovery through interest | Conversion facilitation through clarity | Thought leadership with genuine proof | Post-sale nurturing through empowerment |\n| Key principle | Spark interest with calm clarity | Show how we’re different — and why it matters | Make complexity clear — and insight actionable | Help merchants act — with minimal friction |\n| Tone calibration direction | Confident, clear, lightly distinctive | Assertive, grounded, clear | Expert, composed, specific | Helpful, minimal, user-aware |\n| Message development angles | Frame the problem, show relevance, invite exploration | Frame the decision, prove differentiation, de-risk the switch | Frame the trend, distill the insight, ground it in merchant context | Show what they can do, announce what’s changed, nudge what’s underused |\n| Pitfalls to avoid | Generic slogans, overclaims, category clichés | Vague claims, over-engineering, soft persuasion | Over-stylised headlines, vague thought leadership, corporate tone | Overly casual tone, service-speak, unfocused intros |\n| Voice principle | Say what it does, not what it is | Say how we’re different — and why that matters | State the shift and why merchants should care | Remind, don’t push |\n\n### **4. Tone Modulation**\n\n### **Modulation by audience**\n\n*High-risk merchants respond to precision and control; low-risk merchants respond to clarity and ease.*\n\n| **Dimension** | **High-Risk Merchants** | **Low-Risk Merchants** |\n| --- | --- | --- |\n| **Communication style** | Structured, composed, outcome-led  \n\n*“Real-time settlement insights are now available in your dashboard. No action needed.”* | Friendly, enabling, straightforward \n\n*“You can now track settlements in real time — all from your dashboard.”* |\n| **Tone emphasis** | Precision, control, reliability \n\n*“Visibility into disputes, chargebacks, and issuer responses in one view.”* | Simplicity, flexibility, ease \n\n*“One place to monitor disputes, chargebacks and updates.”* |\n| **Detail level** | High. Full transparency builds trust \n\n*“Each virtual card comes with configurable spend limits, region rules, and freeze options.”* | Medium. Focus on clarity, not overexplaining \n\n*“Set limits, pick regions, freeze anytime.”* |\n| **Empathy level** | Low-key, matter-of-fact \n\n*“We’ve resolved your dispute. Status updated in dashboard.”* | Lightly supportive, human-led \n\n*“Your dispute is resolved — you’ll see the update in your dashboard.”* |\n| **Technical comfort** | Comfortable with compliance, risk, and operational language \n\n*“VAMP flags issuer mismatches using BIN-level data.”* | Less familiar with risk or payments infrastructure \n\n*“Our fraud tools help spot card issues early — even across banks.”* |\n| **Tone risks** | Oversimplification can reduce trustworthiness \n\n*Don’t say: “Instant settlements in just a click!”* | Overcomplication can increase friction \n\n*Don’t say: “Issuer BIN analysis is available under live fraud heuristics.”* |\n| **Preferred proof** | System features, process control, compliance logic \n\n*“SEPA, SWIFT, and APMs supported natively. No need to layer providers.”* | Time-savers, usability wins, quick value \n\n*“All your payouts in one view. No extra tools needed.”* |\n\n### **Modulation by audience: a**pplication areas\n\n**Apply High-Risk Modulation Universally**\n\n*Use a more precise, composed, operational tone — even for low-risk audiences. When accuracy, compliance, or trust override emotional tone, high-risk tonality should lead.*\n\n| **Content Function** | **Rationale** | Example |\n| --- | --- | --- |\n| **Helpdesk & support responses** | Support is about resolution. Build trust for all users with clear, direct, and grounded tone, regardless of vertical. Being structured, composed, outcome-led is the guiding principle here.  | “The chargeback window has closed. You’ll find the final status in your dashboard.” |\n| **Compliance or verification states** | Regulatory-sounding terms (KYC, AML, etc.) need to be stated correctly. Avoid making messages less credible or too vague. Assurance that procedures are in place are universal requirement. | “Your KYC documents are verified. You can now receive settlements without delay.” |\n| **Dashboard tooltips / guidance** | When guiding users through risk or finance-related tools, tone should reflect the matter-of-fact instead of assumed finance ops literacy.  | “Flagged by issuer. See BIN-level issuer data in ‘Fraud Signals’.” |\n| **Feature documentation** | When describing product features in documentation, audience affinity is not as important as technical application. Focus on implementation clarity and feature’s ability to solve problems. | “To activate card-level rules, go to ‘Controls’ > ‘Virtual Cards’ > ‘Spending limits’.” |\n\n**Apply Low-Risk Modulation Universally**\n\n*More inviting, frictionless tone — even for high-risk audiences. If the content is persuasive, not procedural, lead with accessibility and value — not structure.*\n\n| **Content Function** | **Rationale** | Example |\n| --- | --- | --- |\n| **Notification messages (alerts, errors, nudges)** | System messages need to be understood quickly and without misinterpretation. Prioritize guidance and quick grasp in non-critical UX contexts. | “Export ready — your payout file is available now.” |\n| **Feature discoverability nudges** | These aren’t mission-critical, as we are only nudging towards adoption. Tone that builds on low-stakes improves adoptions and makes things feel more accessible. | “Haven’t tried card freezes yet? Pause spend instantly from the dashboard.” |\n| **Success stories / case studies** | Whether betting or retail, decision makers want to understand the clear business value. Overloading stories with technical detail blurs the impact we make. Technical breakdowns can illustrate, but shouldn’t lead the narrative. | “With virtual cards, this merchant cut travel spend by 27% in 3 months.” |\n| **Product announcements** | We want to communicate value each feature brings to either type of client. Benefits lead, technical facts follow. | “New: real-time dispute tracking. See chargeback progress as it happens.” |\n\n**Modulate Based on Audience**\n\nHere, tone should adapt depending on high- or low-risk profile. When user context and feature complexity vary, tone must modulate to meet users where they are.\n\n| **Content Function** | **Rationale** | Examples |\n| --- | --- | --- |\n| **Onboarding flows & emails** | High-risk users may expect forms and delays. Low-risk users may feel lost if overwhelmed. Tone must guide accordingly — clarity vs. ease. | High-risk\n“Your business account is being verified. You’ll receive a compliance update within 24h.”\n\nLow-risk\n“You’re all set — just connect your payout method to start receiving funds.” |\n| **Sales messaging (decks, emails)** | Sales decks are tailored for each client. This enables to customize it by risk profile, meaning tone modulation as well. | High-risk\n“Custom onboarding, risk analysis, and API integration. Built for money flow in regulated industries.”\n\nLow-risk\n“No dev team? Use our hosted checkout for fast setup.” |\n| **Blog/report intros** | Topic-sensitive. A fraud article aimed at iGaming clients needs authority; a reconciliation explainer for SaaS should feel lightweight and accessible. | High-risk\n“With real-time issuer mismatches rising, iGaming platforms need full BIN visibility.”\n\nLow-risk\n“Managing payouts across regions? Here’s how to stay in sync without added tools.” |\n\n### **Modulation by role**\n\n*Business roles respond to outcomes and clarity; technical / Operational roles respond to precision and control.*\n\n| **Dimension** | **Business Roles** | **Technical / Operational Roles** |\n| --- | --- | --- |\n| **Communication style** | Outcome-led, confident, benefit-first   \n\n*“Control payouts, track spend, and grow globally.”* | Structured, process-oriented, exact   \n\n*“Set settlement timing, apply issuer rules, monitor in real time.”* |\n| **Tone emphasis** | Value, impact, simplicity   \n\n*“Faster onboarding. Clearer insights.”* | Stability, control, system trust   \n\n*“Direct API integration. Fraud flagged via issuer data.”* |\n| **Detail level** | Medium — filter for relevance   \n\n*“Real-time views on payouts, card use, and settlement.”* | High — complete view expected   \n\n*“Includes card spend by object ID, status by BIN, freeze history.”* |\n| **Empathy level** | Friction-aware, lightly strategic   \n\n*“Going for scale shouldn’t mean accepting complexity.”* | Low-key, diagnostic, action-oriented   \n\n*“Mismatch flagged in region settings. Adjust and re-sync.”* |\n| **Technical comfort** | Moderate — assumes commercial fluency   \n\n*“One view of fraud and finance controls.”* | High — assumes ops/system literacy   \n\n*“VAMP flags anomalies using issuer heuristics and routing logic.”* |\n| **Tone risks** | Over-complication clouds value   \n\n*Don’t say: “Modular orchestration across PSP layers.”* | Oversimplification undermines trust   \n\n*Don’t say: “Get fast, seamless payments with no setup.”* |\n| **Preferred proof** | Operational ROI, speed-to-value   \n\n*“Cut refund time by 32% in 3 months.”* | Precision, architecture, and reliability   \n\n*“3 endpoints. API uptime 99.95%. Dispute statuses sync hourly.”* |\n\n### **Modulation by role: application areas**\n\n**Apply Business-Oriented Tone Universally**\n*Use this tone where business relevance and clarity are essential, regardless of user seniority or technical background.*\n\n| **Content Function** | **Rationale** | **Example** |\n| --- | --- | --- |\n| **Success stories / case studies** | Business users engage with outcomes, not architecture. Stories should be accessible, strategic, and ROI-driven. | “With virtual cards, this SaaS platform reduced employee spend by 27%.” |\n| **Product announcements** | Lead with value, not infrastructure details. Users need to know why it matters, not how it works. | “Now live: Dispute updates in real time. Stay informed, instantly.” |\n| **Homepage and marketing pages** | Business roles often shape buying decisions. Messaging must clearly highlight payoff and fit. Technical details illustrate it afterwards. | “Global payments. Full visibility. Built to make the money flow.” |\n| **Investor / partner / strategic decks** | Commercial benefit signals maturity. Leave feature sets for appendix or follow-up docs. | “Our platform offer intuitive control layer for  operations across checkout, cards, and banking.” |\n\n**Apply Technical/Operational Tone Universally**\n*Use this tone when precision, setup clarity, or implementation depth matter — regardless of company size or role.*\n\n| **Content Function** | **Rationale** | **Example (Technical Tone)** |\n| --- | --- | --- |\n| **Feature documentation** | Technical users need specificity, implementation clarity, and edge-case awareness. Marketing stops here. | “Enable payout schedules via PATCH /payouts/config. Regional overrides supported.” |\n| **Dashboard tooltips / guidance** | Users expect clarity without simplification. Assume baseline fluency with the platform. | “BIN mismatch: Check issuer country vs. selected payout region.” |\n| **Compliance & risk flows** | Financial operations users must be confident. Tone must be unambiguous and structured. | “KYC verification complete. Documents stored under EU-compliant protocols.” |\n| **API reference & release notes** | This is read by devs and integrators. Don’t soften or generalise. Speak in precise, direct, modular chunks. | “Updated POST /cards endpoint: You can now define region controls via metadata object.” |\n\n**Modulate Based on Role**\n*These content types should flex based on whether the audience is business- or tech/ops-aligned. Often the format is the same — only the tone and angle change.*\n\n| **Content Function** | **Rationale** | Examples |\n| --- | --- | --- |\n| **Onboarding flows & emails** | Same action, different motivators: business impact vs. implementation clarity. | Business role:\n“You’re live. Here’s how to take control of spend and payouts.”\n\nTech / Ops role:\n“Your dashboard is ready. Start by defining regions, limits, and user roles.” |\n| **Sales messaging & decks** | Buyers need clarity and business logic; operators want to know if the system will work. | Business role:\n“One partner for checkout, banking and fraud. From acquiring to payout.”\n\nTech / Ops role:\n“Build your payments stack: modular SDKs, direct API integration, and real-time dispute data.” |\n| **Blog / report intros** | Business tone explores outcomes and mindset; technical tone anchors in mechanics or trends. | Business role:\n“How cross-border complexity is killing growth for merchants.”\n\nTech / Ops role:\n“How BIN-level issuer routing impacts reconciliation accuracy at scale.” |\n| **Feature overview pages** | Match language to user intent: decision-making vs. execution. | Business role:\n“One dashboard to issue cards, control spend, and monitor usage.”\n\nTech / Ops role:\n“Cards can be restricted by IP, region, MCC, and usage windows.” |",
+    "version": 2,
+    "updated_at": "2025-09-15T08:31:44.101482+00:00"
+  },
+  "projects": {
+    "Default": {
+      "generations": []
+    },
+    "Test": {
+      "generations": [
+        {
+          "id": "b7267aeb-7c47-46ef-95bd-897238526028",
+          "source": "Everything you need in one seamless solution.",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "Accept payments. Track and control them in one view.",
+          "liked": false,
+          "ts": "2025-09-15T08:20:49.533705+00:00"
+        },
+        {
+          "id": "dd810420-ff19-464b-911a-64e02abf3012",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "Choose payabl. for a reliable future.",
+          "liked": false,
+          "ts": "2025-09-15T08:23:38.826471+00:00"
+        },
+        {
+          "id": "399bbeff-5ace-42f7-bb3a-36178746a28f",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "\"Select payabl. for a future of controlled payments.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:23:47.596939+00:00"
+        },
+        {
+          "id": "3b49c692-f4fc-4a4d-8254-d82f671fc936",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "\"Select payabl. for a future of controlled payments.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:23:54.996478+00:00"
+        },
+        {
+          "id": "b1362b0e-4cae-4bca-a32b-b3f2aba83dbc",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "\"Select payabl. for a future of controlled payments.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:24:02.642856+00:00"
+        },
+        {
+          "id": "c617395e-614f-4e62-9abc-55feca6d753d",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "Select payabl. for a future of controlled payments.",
+          "liked": false,
+          "ts": "2025-09-15T08:24:10.144619+00:00"
+        },
+        {
+          "id": "fffb88be-1c12-400b-9876-e861ab143ba7",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "Payabl. offers reliable payment solutions worldwide.",
+          "liked": false,
+          "ts": "2025-09-15T08:24:39.977955+00:00"
+        },
+        {
+          "id": "167b7766-b5ed-4fd5-ab7d-f3fd6f2653b8",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "\"Payabl. delivers top-tier performance, consistently.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:24:55.367955+00:00"
+        },
+        {
+          "id": "122e43c6-e4b3-4829-b592-e5988767bfca",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "\"Payabl. offers top-tier performance and reliability in the payments industry.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:25:01.760951+00:00"
+        },
+        {
+          "id": "9eac1ce7-711d-4ef9-860f-0ad9805deaef",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "\"Payabl. delivers reliable performance and control in payments.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:25:05.039345+00:00"
+        },
+        {
+          "id": "859bc609-5989-4aab-9b9c-421e6e529889",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "Payabl delivers top-tier performance in the payments industry.",
+          "liked": false,
+          "ts": "2025-09-15T08:25:07.396042+00:00"
+        },
+        {
+          "id": "09ca4007-4a53-4d3d-adf4-3bed5b1af07c",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "\"Payabl. stands out with its reliable and user-friendly features.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:25:11.315230+00:00"
+        },
+        {
+          "id": "0a523dc7-cdf7-4898-9eb9-c09cfaee169b",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "payabl. provides payment services for businesses. Merchants can accept and send payments online and in-store. Our tools help manage transactions and track activity. We aim to make payment processing reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T08:27:07.391663+00:00"
+        },
+        {
+          "id": "7d94f3bd-714a-4c4b-8521-be3b89ce1433",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "Payabl. empowers businesses with comprehensive payment services. Our offerings enable merchants to accept and process payments both online and in-store effortlessly. We equip you with the tools needed to monitor transactions and analyse activities. At Payabl., our goal is to provide dependable and clear-cut payment solutions.",
+          "liked": false,
+          "ts": "2025-09-15T08:27:25.415563+00:00"
+        },
+        {
+          "id": "b71c6fdc-6099-4886-8604-a51965e9304b",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "Payabl. enables merchants to take control of their payments, both online and in-store. We offer transaction management tools that simplify payments tracking. Our goal is to streamline payment processing, ensuring it's dependable and easy to navigate.",
+          "liked": false,
+          "ts": "2025-09-15T08:27:31.270330+00:00"
+        },
+        {
+          "id": "46ef127e-810e-400e-8cd2-495204480300",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "At payabl., we empower businesses to manage payments, both online and in-store. We offer a suite of tools to oversee transactions and monitor activity in real time. Our focus is on providing a reliable platform that simplifies payment processing for merchants.",
+          "liked": false,
+          "ts": "2025-09-15T08:27:36.620668+00:00"
+        },
+        {
+          "id": "94149a14-9794-4a08-b045-d309100ee984",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "Payabl. empowers businesses with a suite of payment services. We provide merchants with the ability to accept payments both online and in-store, ensuring a seamless process. Further, we equip you with transaction management tools to monitor activity. Our goal at Payabl. is to simplify payment processing while ensuring it's reliable and efficient.",
+          "liked": false,
+          "ts": "2025-09-15T08:27:45.529784+00:00"
+        },
+        {
+          "id": "2259e944-18ea-4847-885f-f2437c2ca097",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "In the realm of payments, payabl. is your reliable partner. We equip businesses with the tools to accept and initiate payments, both online and in-store. Our focus is on transparency and control, providing you with transaction management and real-time activity tracking. With payabl., processing payments becomes a straightforward task, underpinned by consistent reliability.",
+          "liked": false,
+          "ts": "2025-09-15T08:27:50.944353+00:00"
+        },
+        {
+          "id": "2b284eb4-46f8-4a3b-a3e3-5e2792649b1f",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept, manage and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "payabl. offers payment services to businesses. It helps merchants accept, manage, and send payments online and in-store. The company provides tools for managing transactions and tracking activity. payabl.'s services make payment processing reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T08:29:20.867252+00:00"
+        },
+        {
+          "id": "aecb8015-8cdf-44f3-a9c3-eefef8cd2994",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept, manage and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "Make it into 3 sentences",
+          "tone": 1,
+          "length": "medium",
+          "out": "Payabl. offers payment services for businesses. Merchants can accept, manage, and send payments online and in-store. Payabl. provides tools for managing transactions and tracking activity to ensure reliable payment processing.",
+          "liked": false,
+          "ts": "2025-09-15T08:30:16.648169+00:00"
+        },
+        {
+          "id": "5b288e40-a661-4f47-970a-cc2d0dc67740",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "payabl. offers payments services for businesses. Merchants can accept and send payments online and in-store. Tools are available for managing transactions and tracking activity. payabl. focuses on making payment processing reliable and straightforward.",
+          "liked": true,
+          "ts": "2025-09-15T08:32:00.700240+00:00"
+        },
+        {
+          "id": "5e0c8e5d-d500-424f-9116-bb7a718c3a3b",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "Payabl. empowers businesses with payment services, enabling merchants to accept and send payments both online and in-store. We equip you with tools to manage transactions and monitor activity, all with a focus on reliability and simplicity. Our goal is to streamline your payment processing experience.",
+          "liked": false,
+          "ts": "2025-09-15T08:32:18.373568+00:00"
+        }
+      ]
+    },
+    "Test (2)": {
+      "generations": [
+        {
+          "id": "b7267aeb-7c47-46ef-95bd-897238526028",
+          "source": "Everything you need in one seamless solution.",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "Accept payments. Track and control them in one view.",
+          "liked": false,
+          "ts": "2025-09-15T08:20:49.533705+00:00"
+        },
+        {
+          "id": "dd810420-ff19-464b-911a-64e02abf3012",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "Choose payabl. for a reliable future.",
+          "liked": false,
+          "ts": "2025-09-15T08:23:38.826471+00:00"
+        },
+        {
+          "id": "399bbeff-5ace-42f7-bb3a-36178746a28f",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "\"Select payabl. for a future of controlled payments.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:23:47.596939+00:00"
+        },
+        {
+          "id": "3b49c692-f4fc-4a4d-8254-d82f671fc936",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "\"Select payabl. for a future of controlled payments.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:23:54.996478+00:00"
+        },
+        {
+          "id": "b1362b0e-4cae-4bca-a32b-b3f2aba83dbc",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "\"Select payabl. for a future of controlled payments.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:24:02.642856+00:00"
+        },
+        {
+          "id": "c617395e-614f-4e62-9abc-55feca6d753d",
+          "source": "Choose Payabl for an amazing future!!",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "Select payabl. for a future of controlled payments.",
+          "liked": false,
+          "ts": "2025-09-15T08:24:10.144619+00:00"
+        },
+        {
+          "id": "fffb88be-1c12-400b-9876-e861ab143ba7",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "Payabl. offers reliable payment solutions worldwide.",
+          "liked": false,
+          "ts": "2025-09-15T08:24:39.977955+00:00"
+        },
+        {
+          "id": "167b7766-b5ed-4fd5-ab7d-f3fd6f2653b8",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "\"Payabl. delivers top-tier performance, consistently.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:24:55.367955+00:00"
+        },
+        {
+          "id": "122e43c6-e4b3-4829-b592-e5988767bfca",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "\"Payabl. offers top-tier performance and reliability in the payments industry.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:25:01.760951+00:00"
+        },
+        {
+          "id": "9eac1ce7-711d-4ef9-860f-0ad9805deaef",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "\"Payabl. delivers reliable performance and control in payments.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:25:05.039345+00:00"
+        },
+        {
+          "id": "859bc609-5989-4aab-9b9c-421e6e529889",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "Payabl delivers top-tier performance in the payments industry.",
+          "liked": false,
+          "ts": "2025-09-15T08:25:07.396042+00:00"
+        },
+        {
+          "id": "09ca4007-4a53-4d3d-adf4-3bed5b1af07c",
+          "source": "Payabl is the best in the world, period!",
+          "instr": "",
+          "tone": 1,
+          "length": "short",
+          "out": "\"Payabl. stands out with its reliable and user-friendly features.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:25:11.315230+00:00"
+        }
+      ]
+    },
+    "Testing2": {
+      "generations": []
+    },
+    "Testing3": {
+      "generations": [
+        {
+          "id": "ab41d6f7-d771-480c-8733-f175133f97fa",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 2,
+          "length": "medium",
+          "out": "payabl. offers payment services for businesses. Merchants can accept and send payments online and in-store. The company provides tools to manage transactions and track activity. payabl. ensures payment processing is reliable and straightforward.",
+          "liked": true,
+          "ts": "2025-09-15T08:35:19.544233+00:00"
+        },
+        {
+          "id": "f864515f-0976-4175-b50c-660553177c97",
+          "source": "",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "\"Welcome to payabl. — your control centre for payments. From checkout to settlement, every transaction is at your fingertips. Set payout rules, monitor disputes, and adjust settings as your business grows. No more switching between platforms or losing track of payments. With payabl., you're in control.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:35:38.919020+00:00"
+        },
+        {
+          "id": "cb96b3e3-ce09-425f-9e5c-faaa8bc03959",
+          "source": "",
+          "instr": "",
+          "tone": 1,
+          "length": "medium",
+          "out": "\"Discover the power of control with payabl. Our platform brings together payments, banking, and fraud tools into a single, easy-to-use dashboard. With payabl., you can set payout thresholds per region and adjust them anytime. Get real-time insights into your settlement status, dispute tools, and card insights, all in one place. Need help setting this up? We're here to walk you through it. Start exploring payabl. today.\"",
+          "liked": false,
+          "ts": "2025-09-15T08:35:46.441823+00:00"
+        },
+        {
+          "id": "2b35012f-2b7d-420f-92bd-ef8e359679eb",
+          "source": "The product is good. It works well. Users like it.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "The product performs reliably. Users find it effective and satisfactory.",
+          "liked": false,
+          "ts": "2025-09-15T08:45:39.590273+00:00"
+        },
+        {
+          "id": "2145bce3-078b-424c-8bc3-e27dcfd08279",
+          "source": "The product is good. It works well. Users like it.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "The product performs reliably. It meets user needs effectively. Users appreciate its functionality.",
+          "liked": true,
+          "ts": "2025-09-15T08:45:48.590564+00:00"
+        },
+        {
+          "id": "ca3e8b27-e5a9-4a16-90d4-a6fa2edfc5e7",
+          "source": "The product is good. It works well. Users like it.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "The product performs reliably. Users find it effective and satisfactory.",
+          "liked": false,
+          "ts": "2025-09-15T08:45:57.615959+00:00"
+        },
+        {
+          "id": "92df01db-561e-4b15-bdfc-4e1ebe895619",
+          "source": "The product is good. It works well. Users like it.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "The product performs reliably. Users appreciate its functionality.",
+          "liked": false,
+          "ts": "2025-09-15T08:46:02.836488+00:00"
+        },
+        {
+          "id": "a587ee8b-fdee-4cd2-afa1-391180069a0e",
+          "source": "The product is good. It works well. Users like it.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "The product performs reliably. Users appreciate its effectiveness.",
+          "liked": false,
+          "ts": "2025-09-15T08:46:08.683607+00:00"
+        },
+        {
+          "id": "c849ecb5-96d7-4984-933c-ad79c5c96981",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "payabl. offers payments services to businesses. It helps merchants accept payments online and in-store. The company provides tools to manage transactions and track activity. payabl. aims to make payment processing reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T08:46:40.683523+00:00"
+        },
+        {
+          "id": "fbfc1876-18fd-48a8-9ead-b432ba5ed13f",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "payabl. offers payments services for businesses. It helps merchants accept and send payments both online and in-store. The company provides tools to manage transactions and track activity. payabl. ensures payment processing is reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T08:46:48.292508+00:00"
+        },
+        {
+          "id": "44b80058-ba4d-4c56-9235-aca91c407869",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "payabl. offers payments services to businesses. It helps merchants accept payments online and in-store. The company provides tools for managing transactions and tracking activity. payabl. aims to make payment processing reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T08:46:57.661596+00:00"
+        },
+        {
+          "id": "60669d5a-949d-4d59-8665-5a8bef34da6d",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "Payabl. empowers businesses with comprehensive payment services. We enable merchants to accept and dispatch payments, both online and in-store. Our platform offers transaction management tools and real-time activity tracking. With payabl., payment processing becomes dependable and uncomplicated.",
+          "liked": false,
+          "ts": "2025-09-15T08:47:04.317381+00:00"
+        },
+        {
+          "id": "26ed32d5-758c-4f45-970e-3bc12d5e69e9",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "Payabl. empowers businesses with a suite of payment services. Our platform enables merchants to accept and process payments, both online and in-store. With payabl., you gain access to transaction management tools and real-time activity tracking. Our goal is to simplify and streamline payment processing, ensuring reliability at every step.",
+          "liked": false,
+          "ts": "2025-09-15T08:47:10.462196+00:00"
+        },
+        {
+          "id": "7296d345-4f8b-4c3e-bc35-102cb6f74d4f",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "Payabl. equips businesses with the tools to handle payments, both online and in-store. We offer merchants a clear view of their transactions and activity, simplifying the process of payment management. Our aim is to provide a reliable and uncomplicated path for payment processing.",
+          "liked": false,
+          "ts": "2025-09-15T08:47:16.056024+00:00"
+        },
+        {
+          "id": "60362f49-69ce-42be-90f0-219ecce13c13",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "Payabl. equips businesses with the ability to handle payments both online and in-store. Our focus is on empowering merchants with the tools they need to manage transactions and monitor activity effectively. With payabl., the process of payment handling becomes dependable and uncomplicated.",
+          "liked": false,
+          "ts": "2025-09-15T08:47:20.790456+00:00"
+        },
+        {
+          "id": "92fea304-823d-41dd-af66-d85257a204a6",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "Payabl. empowers businesses to manage their payments with confidence, both online and in-store. Our suite of tools enables merchants to control transactions and monitor activity seamlessly. Our objective is to simplify payment processing while reinforcing reliability.",
+          "liked": false,
+          "ts": "2025-09-15T08:47:25.502327+00:00"
+        },
+        {
+          "id": "d32958a9-4bd2-4861-bbdc-8bb03c70e51d",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "Payabl. empowers businesses with comprehensive payment services, bridging the gap between online and in-store transactions. We provide merchants with intuitive tools to manage and monitor all their payment activity. With payabl., the complexity of payment processing is streamlined, offering a stable and straightforward solution for businesses.",
+          "liked": false,
+          "ts": "2025-09-15T08:47:29.984614+00:00"
+        },
+        {
+          "id": "6d048906-c02c-4648-bb17-a2d6a963f336",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "At payabl., we deliver payment services to businesses. Our platform empowers merchants to both accept and initiate payments, whether online or in-store. We offer tools for transaction management and activity tracking. With a dedication to reliability and simplicity, payabl.'s services streamline payment processing for merchants.",
+          "liked": false,
+          "ts": "2025-09-15T08:47:33.718051+00:00"
+        },
+        {
+          "id": "f5058ba3-b236-4cf9-b24e-151c93be73c1",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "Payabl. delivers a suite of payment solutions for businesses. We enable merchants to accept and process payments both online and in-store with ease and efficiency. Our platform provides robust tools to manage transactions and monitor activities in real time, simplifying the complexity of payment processing for businesses.",
+          "liked": false,
+          "ts": "2025-09-15T08:47:40.766548+00:00"
+        },
+        {
+          "id": "b691e9fc-abad-4784-91d1-31a1a55324f0",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 0,
+          "length": "medium",
+          "out": "payabl. offers payment services to businesses, helping merchants accept and send payments both online and in physical stores. The company provides tools for managing transactions and tracking activity, aiming to make payment processing reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T08:59:34.136184+00:00"
+        },
+        {
+          "id": "3acaf6b2-7be6-4883-9d92-7827c604b1a5",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "payabl. offers payments services to businesses. Merchants can accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. payabl. aims to make payment processing reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T08:59:45.696551+00:00"
+        },
+        {
+          "id": "c3b44b01-595d-4f3b-b194-da48117d3b6e",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "payabl. provides payment services for businesses. It helps merchants accept payments online and in-store. The company offers tools to manage transactions and track activity. payabl.'s services aim to make payment processing reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T08:59:52.164960+00:00"
+        }
+      ]
+    },
+    "Testing4": {
+      "generations": [
+        {
+          "id": "03db3a9f-b2d6-4e0b-8210-494f29ee36cb",
+          "source": "Payabl is a company that offers payment services to businesses. It helps merchants accept and send payments online and in physical stores. The company provides tools for managing transactions and tracking activity. Payabl’s services are aimed at making payment processing reliable and straightforward.",
+          "instr": "",
+          "tone": 3,
+          "length": "medium",
+          "out": "payabl. offers payment services to businesses. Merchants can accept and send payments online and in stores. The company provides tools to manage transactions and track activity. payabl.'s services make payment processing reliable and straightforward.",
+          "liked": false,
+          "ts": "2025-09-15T09:00:43.794099+00:00"
+        }
+      ]
+    }
+  },
+  "current_project": "Testing4"
+}
