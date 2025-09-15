@@ -64,6 +64,7 @@ def _task_for(source_text: Optional[str], requested: Optional[TaskCode]) -> Task
 def build_prompts(
     *,
     guidelines: str,
+    product_description: str,
     source_text: str,
     instructions: Optional[str],
     tone_level: ToneLevel,
@@ -80,6 +81,11 @@ def build_prompts(
         system_prompt = f"""
 You are a text editor. Make minimal changes to improve clarity while preserving the original meaning and style.
 
+Product Context:
+---
+{_compile_guidelines(product_description)}
+---
+
 Guidelines (apply lightly):
 ---
 {_compile_guidelines(guidelines)}
@@ -93,6 +99,11 @@ Only output the final copytext (no preambles, no bullet summaries, no Markdown u
         system_prompt = f"""
 You are a brand voice editor. Apply the guidelines moderately while preserving the core message.
 
+Product Context:
+---
+{_compile_guidelines(product_description)}
+---
+
 Guidelines (apply moderately):
 ---
 {_compile_guidelines(guidelines)}
@@ -105,6 +116,11 @@ Only output the final copytext (no preambles, no bullet summaries, no Markdown u
         # Moderate guidelines - clear brand voice application
         system_prompt = f"""
 You are a brand voice engine. Apply the guidelines clearly while maintaining the message.
+
+Product Context:
+---
+{_compile_guidelines(product_description)}
+---
 
 Guidelines (apply clearly):
 ---
@@ -124,6 +140,11 @@ Key rules to enforce at all times:
 - Use precise, human language; avoid jargon and buzzwords.
 - Use sentence case in headings/CTAs; keep punctuation clean; avoid exclamation marks.
 - Respect vocabulary and the "payment vs payments" rules.
+
+Product Context:
+---
+{_compile_guidelines(product_description)}
+---
 
 Guidelines (canonical, authoritative - apply strictly):
 ---

@@ -62,8 +62,10 @@ if page == "Editor":
 
     if st.button("Generate"):
         g_content, _, _ = get_guidelines(STATE)
+        pd_content, _, _ = get_product_description(STATE)
         spec = build_prompts(
             guidelines=g_content,
+            product_description=pd_content,
             source_text=source_text,
             instructions=instructions,
             tone_level=tone_level,
@@ -92,8 +94,10 @@ if page == "Editor":
             if st.button("Regenerate", key="regenerate-btn"):
                 # re-run with same inputs
                 g_content, _, _ = get_guidelines(STATE)
+                pd_content, _, _ = get_product_description(STATE)
                 spec = build_prompts(
                     guidelines=g_content,
+                    product_description=pd_content,
                     source_text=source_text,
                     instructions=instructions,
                     tone_level=tone_level,
