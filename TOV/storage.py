@@ -59,6 +59,7 @@ def _default_state() -> Dict[str, Any]:
     return {
         "schema_version": SCHEMA_VERSION,
         "guidelines": {"content": "", "version": 0, "updated_at": _now_iso()},
+        "product_description": {"content": "", "version": 0, "updated_at": _now_iso()},
         "projects": {"Default": {"generations": []}},
         "current_project": "Default",
     }
@@ -105,6 +106,24 @@ def update_guidelines(state: Dict[str, Any], content: str) -> Dict[str, Any]:
     if content.strip() != cur.get("content", "").strip():
         new_version = int(cur.get("version", 0)) + 1
         state["guidelines"] = {
+            "content": content,
+            "version": new_version,
+            "updated_at": _now_iso(),
+        }
+    return state
+
+
+def get_product_description(state: Dict[str, Any]) -> Tuple[str, int, str]:
+    pd = state.get("product_description", {})
+    return pd.get("content", ""), int(pd.get("version", 0)), pd.get("updated_at", _now_iso())
+
+
+def update_product_description(state: Dict[str, Any], content: str) -> Dict[str, Any]:
+    # Bump version if content changes
+    cur = state.get("product_description", {})
+    if content.strip() != cur.get("content", "").strip():
+        new_version = int(cur.get("version", 0)) + 1
+        state["product_description"] = {
             "content": content,
             "version": new_version,
             "updated_at": _now_iso(),

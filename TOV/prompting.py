@@ -27,10 +27,10 @@ TONE_TO_PARAMS: Dict[ToneLevel, Dict[str, float]] = {
     3: {"temperature": 0.6, "frequency_penalty": 0.3, "presence_penalty": 0.1},  # strict guidelines
 }
 
-LENGTH_TO_MAX_TOKENS: Dict[LengthCode, int] = {
-    "short": 220,   # ≈ 60–100 words
-    "medium": 400,  # ≈ 120–180 words
-    "long": 800,    # ≈ 250–400 words
+LENGTH_TO_INSTRUCTIONS: Dict[LengthCode, str] = {
+    "short": "Keep it very concise and to the point. Use short sentences and avoid unnecessary details.",
+    "medium": "Provide a balanced amount of detail. Be clear and informative without being overly brief or verbose.",
+    "long": "Expand with more detail and context. Provide comprehensive information while maintaining clarity."
 }
 
 
@@ -136,14 +136,13 @@ Transform the text completely to match the brand voice. Only output the final co
     user_prompt = f"""
 Task: {task_code}
 Guideline adherence: {tone_labels[tone_level]}
-Length: {length_code}
+Length: {LENGTH_TO_INSTRUCTIONS[length_code]}
 Instructions: {(instructions or '').strip() or 'N/A'}
 
 Source text:
 >>>\n{(source_text or '').strip()}\n<<<
 
 Constraints:
-- Apply guidelines at {tone_labels[tone_level]} level.
 - If Task is rewrite: preserve meaning, improve clarity, remove hype.
 - If Task is create: draft directly to the point; do not invent fake stats or names.
 - Prefer short sentences and concrete verbs (set, choose, adjust, track).
@@ -151,7 +150,6 @@ Constraints:
 
     params = {
         **TONE_TO_PARAMS[tone_level],
-        "max_tokens": LENGTH_TO_MAX_TOKENS[length_code],
     }
 
     return PromptSpec(system=system_prompt, user=user_prompt, params=params, task=task_code, length=length_code, tone=tone_level)

@@ -18,9 +18,9 @@ import json
 from storage import (
     load_state, persist_and_return,
     get_guidelines, update_guidelines,
+    get_product_description, update_product_description,
     list_projects, create_project, set_current_project, get_current_project,
-    add_generation, list_generations, toggle_like, list_liked,
-    export_project_to_file, import_project_from_file
+    add_generation, list_generations, toggle_like, list_liked
 )
 from prompting import build_prompts
 from llm import generate
@@ -31,7 +31,7 @@ STATE = load_state()
 
 # Sidebar navigation
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Editor", "History", "Tone Admin", "Export/Import"])
+page = st.sidebar.radio("Go to", ["Editor", "History", "Tone Admin"])
 
 # Project selection
 st.sidebar.markdown("---")
@@ -84,33 +84,57 @@ if page == "Editor":
     if "last_output" in st.session_state:
         st.subheader("Latest output")
         st.text_area("Generated text", st.session_state["last_output"], height=200)
-        if st.button("Copy to clipboard"):
-            st.code(st.session_state["last_output"])
-        if st.button("Regenerate"):
-            # re-run with same inputs
-            g_content, _, _ = get_guidelines(STATE)
-            spec = build_prompts(
-                guidelines=g_content,
-                source_text=source_text,
-                instructions=instructions,
-                tone_level=tone_level,
-                length_code=length_code,
-            )
-            resp = generate(spec.system, spec.user, params=spec.params, model="gpt-4o")
-            STATE = add_generation(
-                STATE,
-                source=source_text,
-                instr=instructions,
-                tone=tone_level,
-                length=length_code,
-                out=resp["text"],
-            )
-            STATE = persist_and_return(STATE)
-            st.session_state["last_output"] = resp["text"]
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            if st.button("Copy to clipboard"):
+                st.code(st.session_state["last_output"])
+        with col2:
+            if st.button("Regenerate", key="regenerate-btn"):
+                # re-run with same inputs
+                g_content, _, _ = get_guidelines(STATE)
+                spec = build_prompts(
+                    guidelines=g_content,
+                    source_text=source_text,
+                    instructions=instructions,
+                    tone_level=tone_level,
+                    length_code=length_code,
+                )
+                resp = generate(spec.system, spec.user, params=spec.params, model="gpt-4o")
+                STATE = add_generation(
+                    STATE,
+                    source=source_text,
+                    instr=instructions,
+                    tone=tone_level,
+                    length=length_code,
+                    out=resp["text"],
+                )
+                STATE = persist_and_return(STATE)
+                st.session_state["last_output"] = resp["text"]
+                st.rerun()
+        with col3:
+            if st.button("❤️ Like", key="like-btn"):
+                # Get the most recent generation and toggle its like status
+                gens = list_generations(STATE)
+                if gens:
+                    latest_gen = gens[-1]  # Most recent generation
+                    STATE = toggle_like(STATE, latest_gen["id"])
+                    STATE = persist_and_return(STATE)
+                    st.success("Liked! ❤️")
+                    st.rerun()
 
 # ---------------- History ----------------
 elif page == "History":
     st.header(f"History — {get_current_project(STATE)}")
+    
+    # Show liked texts at the top
+    liked = list_liked(STATE)
+    if liked:
+        st.subheader("❤️ Liked texts")
+        for g in liked:
+            st.text_area(f"Liked: {g['ts']}", g["out"], height=100, key=f"liked-{g['id']}")
+        st.markdown("---")
+    
+    # Show all generations
     gens = list_generations(STATE)
     if not gens:
         st.info("No generations yet.")
@@ -118,40 +142,29 @@ elif page == "History":
         for g in reversed(gens):
             st.markdown(f"**{g['ts']}** — Tone {g['tone']} — {g['length']}")
             with st.expander("View"):
-                st.text_area("Output", g["out"], height=150)
+                st.text_area("Output", g["out"], height=150, key=f"output-{g['id']}")
                 if st.button("Toggle like", key=f"like-{g['id']}"):
                     STATE = toggle_like(STATE, g["id"])
                     STATE = persist_and_return(STATE)
-        st.markdown("---")
-        st.subheader("Liked texts")
-        liked = list_liked(STATE)
-        for g in liked:
-            st.text_area(f"Liked: {g['ts']}", g["out"], height=100)
 
 # ---------------- Tone Admin ----------------
 elif page == "Tone Admin":
-    st.header("Tone of Voice Guidelines")
+    st.header("Tone of Voice & Product Configuration")
+    
+    # Guidelines section
+    st.subheader("Tone of Voice Guidelines")
     content, ver, updated = get_guidelines(STATE)
-    txt = st.text_area("Edit guidelines", content, height=400)
-    if st.button("Save guidelines"):
-        STATE = update_guidelines(STATE, txt)
+    guidelines_txt = st.text_area("Edit guidelines", content, height=300, key="guidelines-text")
+    
+    # Product Description section
+    st.subheader("Product Description")
+    pd_content, pd_ver, pd_updated = get_product_description(STATE)
+    product_txt = st.text_area("Edit product description", pd_content, height=200, key="product-text")
+    
+    # Save button for both
+    if st.button("Save Guidelines & Product Description"):
+        STATE = update_guidelines(STATE, guidelines_txt)
+        STATE = update_product_description(STATE, product_txt)
         STATE = persist_and_return(STATE)
-        st.success("Guidelines updated.")
+        st.success("Guidelines and Product Description updated.")
 
-# ---------------- Export/Import ----------------
-elif page == "Export/Import":
-    st.header("Export or Import Projects")
-    exp_path = Path(f"export_{get_current_project(STATE)}.json")
-    if st.button("Export current project"):
-        export_project_to_file(STATE, exp_path)
-        with exp_path.open("rb") as f:
-            st.download_button("Download export", f, file_name=exp_path.name)
-
-    st.subheader("Import project")
-    file = st.file_uploader("Choose JSON file")
-    if file is not None:
-        temp = Path("import_tmp.json")
-        temp.write_bytes(file.read())
-        STATE, new_name = import_project_from_file(STATE, temp)
-        STATE = persist_and_return(STATE)
-        st.success(f"Imported as project '{new_name}'.")
