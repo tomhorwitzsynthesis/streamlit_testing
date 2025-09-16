@@ -1,11 +1,21 @@
 # === Configuration ===
 import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# === DEPLOYMENT CONFIGURATION ===
+# Set to True when deploying to Streamlit Cloud, False for local development
+STREAMLIT_HOSTING = False  # Change to True for Streamlit Cloud deployment
 
-APIFY_TOKEN = os.getenv("APIFY_TOKEN")   # Set in .env file or environment variable
+# Load environment variables based on deployment type
+if STREAMLIT_HOSTING:
+    # Streamlit Cloud - uses secrets management
+    APIFY_TOKEN = os.getenv("APIFY_TOKEN")
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+else:
+    # Local development - uses .env file
+    from dotenv import load_dotenv
+    load_dotenv()
+    APIFY_TOKEN = os.getenv("APIFY_TOKEN")
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 TIMEZONE = "Europe/Vilnius"
 DAYS_BACK = 14            # today + yesterday
@@ -13,19 +23,16 @@ MAX_ADS = 50
 MAX_WORKERS = 8          # number of parallel scraping threads
 
 # === PATH CONFIGURATION ===
-# Choose your deployment setup:
-# Option 1: For direct repository root deployment (current setup)
-# MASTER_XLSX = "./data/ads_master_file.xlsx"
-# SUMMARIES_XLSX = "./data/summaries.xlsx"
-
-# Option 2: For "Akropolis Ad Updates" folder deployment
-MASTER_XLSX = "./Akropolis_Ad_Updates/data/ads_master_file.xlsx"
-SUMMARIES_XLSX = "./Akropolis_Ad_Updates/data/summaries.xlsx"
-
-# Uncomment the option you want to use and comment out the other
+if STREAMLIT_HOSTING:
+    # Streamlit Cloud - direct repository root deployment
+    MASTER_XLSX = "./data/ads_master_file.xlsx"
+    SUMMARIES_XLSX = "./data/summaries.xlsx"
+else:
+    # Local development - "Akropolis_Ad_Updates" folder structure
+    MASTER_XLSX = "./Akropolis_Ad_Updates/data/ads_master_file.xlsx"
+    SUMMARIES_XLSX = "./Akropolis_Ad_Updates/data/summaries.xlsx"
 
 # === GPT Labeling Configuration ===
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")     # Set in .env file or environment variable
 GPT_MAX_WORKERS = 20    # number of parallel GPT API calls
 ENABLE_GPT_LABELING = True  # Set to False to skip GPT labeling
 ENABLE_WEEKLY_SUMMARIES = True  # Set to False to skip weekly summary generation
