@@ -7,7 +7,7 @@ import numpy as np
 import os
 
 # Configuration
-DATA_ROOT = os.getenv('DATA_ROOT', '.')  # Default to current directory, can be overridden with environment variable
+DATA_ROOT = "SIRIN_Sustainability"
 DATA_FILE = 'Full_Sustainability_Data_Labeled_Scored_Themed.xlsx'
 
 # Set page config
@@ -289,3 +289,4 @@ if df is not None:
 
 else:
     st.error("Unable to load data. Please check the file path and try again.")
+
