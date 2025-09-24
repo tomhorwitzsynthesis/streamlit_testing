@@ -45,10 +45,10 @@ MASTER_FILE_PATH = config.MASTER_XLSX
 
 @st.cache_data(show_spinner=False)
 def load_data():
-    """Load and process data from the master file for the last 7 days and previous 7 days"""
+    """Load and process data from the master file for September 3–16, 2025"""
     df = pd.read_excel(MASTER_FILE_PATH)
-    
-    # Rename columns to match expected format
+
+    # Rename columns
     df = df.rename(columns={
         "ad_details/aaa_info/eu_total_reach": "reach",
         "startDateFormatted": "start_date",
@@ -56,41 +56,39 @@ def load_data():
         "adArchiveID": "ad_id",
         "snapshot/body/text": "caption",
     })
-    
-    # Parse dates (already timezone-naive strings)
+
     df["date"] = pd.to_datetime(df["start_date"], errors="coerce")
-    
-    # Convert reach to numeric
     df["reach"] = pd.to_numeric(df["reach"], errors="coerce").fillna(0)
-    
-    # Get current date and calculate date ranges for 14 days
-    today = datetime.now().date()
-    last_14_days_start = today - timedelta(days=13)  # Include today
-    last_14_days_end = today
-    prev_7_days_start = today - timedelta(days=13)
-    prev_7_days_end = today - timedelta(days=7)
-    current_7_days_start = today - timedelta(days=6)
-    current_7_days_end = today
-    
-    # Filter for last 14 days (for charts)
+
+    # --- fixed inclusive bounds ---
+    start_date_fixed = datetime(2025, 9, 3).date()
+    end_date_fixed   = datetime(2025, 9, 16).date()
+
+    # define comparison windows inside that period
+    prev_7_days_start = datetime(2025, 9, 3).date()
+    prev_7_days_end   = datetime(2025, 9, 9).date()
+    current_7_days_start = datetime(2025, 9, 10).date()
+    current_7_days_end   = datetime(2025, 9, 16).date()
+
+    # full 3–16 range for overall 14-day analysis
     df_14_days = df[
-        (df["date"].dt.date >= last_14_days_start) & 
-        (df["date"].dt.date <= last_14_days_end)
+        (df["date"].dt.date >= start_date_fixed)
+        & (df["date"].dt.date <= end_date_fixed)
     ].copy()
-    
-    # Filter for current 7 days (for comparison stats)
-    df_current = df[
-        (df["date"].dt.date >= current_7_days_start) & 
-        (df["date"].dt.date <= current_7_days_end)
-    ].copy()
-    
-    # Filter for previous 7 days (for comparison stats)
+
+    # comparison subsets
     df_previous = df[
-        (df["date"].dt.date >= prev_7_days_start) & 
-        (df["date"].dt.date <= prev_7_days_end)
+        (df["date"].dt.date >= prev_7_days_start)
+        & (df["date"].dt.date <= prev_7_days_end)
     ].copy()
-    
-    return df_14_days, df_current, df_previous, last_14_days_start, last_14_days_end
+
+    df_current = df[
+        (df["date"].dt.date >= current_7_days_start)
+        & (df["date"].dt.date <= current_7_days_end)
+    ].copy()
+
+    return df_14_days, df_current, df_previous, start_date_fixed, end_date_fixed
+
 
 def calculate_comparison_stats(current_df, previous_df, akropolis_brands):
     """Calculate comparison statistics between current and previous week"""
@@ -624,3 +622,4 @@ with st.expander("Totals by brand"):
         .sort_values("total_reach", ascending=False)
     )
     st.dataframe(totals, use_container_width=True)
+
