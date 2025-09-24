@@ -18,7 +18,7 @@ else:
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 TIMEZONE = "Europe/Vilnius"
-DAYS_BACK = 14            # today + yesterday
+DAYS_BACK = 24            # today + yesterday
 MAX_ADS = 50
 MAX_WORKERS = 8          # number of parallel scraping threads
 
@@ -68,3 +68,4 @@ DEDUP_KEYS = [
     "adArchiveID",
     "startDateFormatted"
 ]
+
