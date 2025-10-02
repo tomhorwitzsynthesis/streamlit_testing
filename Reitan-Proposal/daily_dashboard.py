@@ -7,8 +7,8 @@ import numpy as np
 import os
 
 # Data configuration
-DATA_ROOT = "Narvesen_compos_analysis.xlsx"  # Change this to your data source
-REITAN_DATA_ROOT = "Reitan_compos_analysis.xlsx"  # Change this to your data source
+DATA_ROOT = "Reitan-Proposal/Narvesen_compos_analysis.xlsx"  # Change this to your data source
+REITAN_DATA_ROOT = "Reitan-Proposal/Reitan_compos_analysis.xlsx"  # Change this to your data source
 
 # Page configuration
 st.set_page_config(
@@ -259,3 +259,4 @@ with tab2:
 # Footer
 st.markdown("---")
 st.markdown("*Dashboard updated: September 29, 2025*")
+
