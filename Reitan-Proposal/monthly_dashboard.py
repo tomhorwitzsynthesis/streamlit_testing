@@ -7,8 +7,8 @@ import numpy as np
 import os
 
 # Data configuration
-DATA_ROOT = "Narvesen_compos_analysis.xlsx"  # Change this to your data source
-REITAN_DATA_ROOT = "Reitan_compos_analysis.xlsx"  # Change this to your data source
+DATA_ROOT = "Reitan-Proposal/Narvesen_compos_analysis.xlsx"  # Change this to your data source
+REITAN_DATA_ROOT = "Reitan-Proposal/Reitan_compos_analysis.xlsx"  # Change this to your data source
 
 def _format_simple_metric_card(label, val, pct=None, rank_now=None, total_ranks=None):
     """Format a metric card with optional percentage change and ranking."""
@@ -860,3 +860,4 @@ with articles_tab2:
 # Footer
 st.markdown("---")
 st.markdown("*Dashboard updated: September 30, 2025*")
+
